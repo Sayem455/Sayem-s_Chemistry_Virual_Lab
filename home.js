@@ -2,10 +2,11 @@ import {$, connect, escapeHTML as h, rows, safeURL, setupMessage, tr} from "./sh
 const form = $("admission-form");
 let notices = [];
 let teacher = {};
+const defaultDegree = $("teacher-degree").textContent;
 function render() {
   $("public-notices").innerHTML = notices.length ? notices.map(item => '<p><strong>'+h(tr(item.title, item.titleEn || item.title))+'</strong> · '+h(item.date)+'<br>'+h(tr(item.body, item.bodyEn || item.body))+'</p>').join("") : '<p>'+tr("এখনো কোনো নোটিশ প্রকাশিত হয়নি।","No notices have been published.")+'</p>';
   $("teacher-bio").textContent = tr(teacher.bio || "HSC রসায়ন শিক্ষক · Sayem’s Chemistry",teacher.bioEn || "HSC Chemistry teacher · Sayem’s Chemistry");
-  $("teacher-degree").textContent = tr(teacher.degree,teacher.degreeEn || teacher.degree) || "";
+  $("teacher-degree").textContent = tr(teacher.degree,teacher.degreeEn || teacher.degree) || defaultDegree;
   const photo = safeURL(teacher.photo);
   if (photo) { $("teacher-photo").src = photo; $("teacher-photo").alt = "S.M. Sayem Mahmud"; }
 }

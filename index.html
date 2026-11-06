@@ -9,6 +9,15 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css"><link rel="stylesheet" href="portal.css">
+  <style>
+    .sc-batch-schedule { margin: 0 0 18px; padding: 12px 14px; border-radius: 12px; background: #edf4ff; color: #142951; }
+    .sc-batch-schedule p { margin: 0 0 6px; color: #34496a; font-size: .92rem; }
+    .sc-batch-time { display: flex; align-items: center; flex-wrap: wrap; gap: 4px 10px; margin-top: 4px; }
+    .sc-enrollment { display: inline-block; padding: 2px 9px; border-radius: 20px; background: #ffe38a; color: #392900; font-size: .83rem; font-weight: 700; }
+    .sc-teacher img { width: clamp(88px, 20vw, 150px); height: auto; aspect-ratio: 4 / 5; object-fit: cover; object-position: 50% 25%; flex-shrink: 0; }
+    .sc-teacher p { margin: 4px 0 0; }
+    @media (max-width: 420px) { .sc-teacher { gap: 12px; padding: 14px; } }
+  </style>
 </head>
 <body>
   <header class="site-header">
@@ -84,6 +93,11 @@
             <h3>Final Review A+ Batch</h3>
             <p data-bn="গুরুত্বপূর্ণ কনসেপ্ট রিভিশন, অধ্যায়ভিত্তিক অনুশীলন ও পরীক্ষার প্রস্তুতি।" data-en="Revise key concepts, practise chapter by chapter, and prepare strategically for exams.">গুরুত্বপূর্ণ কনসেপ্ট রিভিশন, অধ্যায়ভিত্তিক অনুশীলন ও পরীক্ষার প্রস্তুতি।</p>
             <ul><li data-bn="বিষয়ভিত্তিক নোট ও শিটস" data-en="Topic-wise notes and sheets">বিষয়ভিত্তিক নোট ও শিটস</li><li data-bn="নিয়মিত MCQ ও CQ অনুশীলন" data-en="Regular MCQ and CQ practice">নিয়মিত MCQ ও CQ অনুশীলন</li><li data-bn="পরীক্ষা ও ফিডব্যাক" data-en="Exams and feedback">পরীক্ষা ও ফিডব্যাক</li></ul>
+            <div class="sc-batch-schedule">
+              <p data-bn="শনি, সোম ও বুধ" data-en="Sat, Mon &amp; Wed">শনি, সোম ও বুধ</p>
+              <div class="sc-batch-time"><strong data-bn="দুপুর ১২:১৫" data-en="12:15 PM">দুপুর ১২:১৫</strong></div>
+              <div class="sc-batch-time"><strong data-bn="দুপুর ২:০০" data-en="2:00 PM">দুপুর ২:০০</strong></div>
+            </div>
             <a href="#contact" class="text-link"><span data-bn="ভর্তি সম্পর্কে জানুন" data-en="Admission details">ভর্তি সম্পর্কে জানুন</span> ↗</a>
           </article>
           <article class="course-card">
@@ -91,6 +105,11 @@
             <h3>Concept Builder Batch</h3>
             <p data-bn="মৌলিক ধারণা পরিষ্কার করে শুরু থেকে শক্ত ভিত্তি তৈরি।" data-en="Build a strong foundation from the basics with clear explanations.">মৌলিক ধারণা পরিষ্কার করে শুরু থেকে শক্ত ভিত্তি তৈরি।</p>
             <ul><li data-bn="সহজ ও আকর্ষণীয় উপস্থাপনা" data-en="Clear and engaging lessons">সহজ ও আকর্ষণীয় উপস্থাপনা</li><li data-bn="মেমোরি টেকনিক ও শর্ট নোট" data-en="Memory techniques and short notes">মেমোরি টেকনিক ও শর্ট নোট</li><li data-bn="নিয়মিত অনুশীলন" data-en="Consistent practice">নিয়মিত অনুশীলন</li></ul>
+            <div class="sc-batch-schedule">
+              <p data-bn="রবি, মঙ্গল ও বৃহস্পতি" data-en="Sun, Tue &amp; Thu">রবি, মঙ্গল ও বৃহস্পতি</p>
+              <div class="sc-batch-time"><strong data-bn="দুপুর ১:৩০" data-en="1:30 PM">দুপুর ১:৩০</strong> <a class="sc-enrollment" href="#admission"><span data-bn="ভর্তি চলছে" data-en="Admission open">ভর্তি চলছে</span></a></div>
+              <div class="sc-batch-time"><strong data-bn="দুপুর ২:৩০" data-en="2:30 PM">দুপুর ২:৩০</strong></div>
+            </div>
             <a href="#contact" class="text-link"><span data-bn="বিস্তারিত জানুন" data-en="Learn more">বিস্তারিত জানুন</span> ↗</a>
           </article>
         </div>
@@ -126,7 +145,7 @@
         <article class="sc-card"><h2 data-bn="রুটিন, নোটিশ ও পরীক্ষা" data-en="Schedule, notices and exams">রুটিন, নোটিশ ও পরীক্ষা</h2><div id="public-notices"></div></article>
         <article class="sc-card"><h2 data-bn="পরীক্ষার ফলাফল" data-en="Exam results">পরীক্ষার ফলাফল</h2><p data-bn="নিজের মার্কশিট দেখতে শিক্ষার্থী অ্যাকাউন্টে লগইন করো।" data-en="Sign in to view your own marksheets.">নিজের মার্কশিট দেখতে শিক্ষার্থী অ্যাকাউন্টে লগইন করো।</p><a href="portal.html#marks"><span data-bn="ফলাফল দেখো" data-en="View results">ফলাফল দেখো</span> →</a></article>
       </div>
-      <article class="sc-card sc-teacher"><img id="teacher-photo" src="sayems-chemistry-logo.png" alt=""><div><h2 data-bn="শিক্ষক পরিচিতি" data-en="Meet the teacher">শিক্ষক পরিচিতি</h2><strong>S.M. Sayem Mahmud</strong><p id="teacher-bio">HSC Chemistry · Sayem’s Chemistry</p><p id="teacher-degree"></p></div></article>
+      <article class="sc-card sc-teacher"><img id="teacher-photo" src="teacher-sayem.jpg" alt="S.M. Sayem Mahmud" loading="lazy"><div><h2 data-bn="শিক্ষক পরিচিতি" data-en="Meet the teacher">শিক্ষক পরিচিতি</h2><strong>S.M. Sayem Mahmud</strong><p id="teacher-bio">HSC Chemistry · Sayem’s Chemistry</p><p id="teacher-degree">B.Sc. (Engineering) in EEE, PUST</p></div></article>
     </div></section>
 
     <section class="section contact-section" id="contact">
