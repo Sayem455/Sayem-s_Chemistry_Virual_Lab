@@ -1,0 +1,46 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedIn() { return request.auth != null; }
+    function admin() { return signedIn() && exists(/databases/$(database)/documents/admins/$(request.auth.uid)); }
+    function owner(uid) { return signedIn() && request.auth.uid == uid; }
+    function student() { return signedIn() && exists(/databases/$(database)/documents/students/$(request.auth.uid)); }
+    function ownBatch(batch) { return student() && get(/databases/$(database)/documents/students/$(request.auth.uid)).data.batch == batch; }
+
+    match /admins/{uid} {
+      allow get: if owner(uid);
+    }
+    match /students/{uid} {
+      allow read: if owner(uid) || admin();
+      allow write: if admin();
+      match /records/{id} {
+        allow read: if owner(uid) || admin();
+        allow write: if admin();
+      }
+    }
+    match /settings/teacher {
+      allow read: if true;
+      allow write: if admin();
+    }
+    match /resources/{id} {
+      allow read: if resource.data.public == true || student() || admin();
+      allow write: if admin();
+    }
+    match /quizzes/{id} {
+      allow read: if resource.data.public == true || student() || admin();
+      allow write: if admin();
+    }
+    match /notices/{id} {
+      allow read: if resource.data.public == true || (resource.data.batch == '' && student()) || ownBatch(resource.data.batch) || admin();
+      allow write: if admin();
+    }
+    match /applications/{id} {
+      allow create: if request.resource.data.keys().hasOnly(['name','phone','batch','createdAt'])
+        && request.resource.data.name is string && request.resource.data.name.size() > 0 && request.resource.data.name.size() <= 100
+        && request.resource.data.batch is string && request.resource.data.batch.size() > 0 && request.resource.data.batch.size() <= 100
+        && request.resource.data.phone is string && request.resource.data.phone.matches('^[+]?[0-9]{10,15}$')
+        && request.resource.data.createdAt is string && request.resource.data.createdAt.size() <= 30;
+      allow read, update, delete: if admin();
+    }
+  }
+}

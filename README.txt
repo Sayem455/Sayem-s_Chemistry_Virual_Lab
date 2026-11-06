@@ -1,26 +1,51 @@
-SAYEM'S CHEMISTRY WEBSITE + VIRTUAL LAB (STARTER RELEASE)
+Sayem’s Chemistry | Vercel website package
+==========================================
 
-Files:
-- index.html: Main Sayem's Chemistry website
-- lab.html: Virtual Chemistry Lab dashboard
-- lab.css / lab.js: Lab styling and interactive demo logic
-- style.css / script.js: Main website styling and interactions
-- sayems-chemistry-logo.png: Supplied brand logo
+এই ZIP-এর ভেতরে index.html, lab.html, portal.html ও admin.html একই ফোল্ডারে আছে।
+বিদ্যমান Virtual Lab এবং মূল হোমপেজের নকশা থেকে এই সংস্করণ তৈরি হয়েছে।
 
-Deploy:
-1. Upload the contents of this folder to your Vercel project (or import the folder using Vercel CLI/Git).
-2. Keep all files in the same root directory.
-3. Open /lab.html or click Virtual Lab on the main website.
+Vercel-এ আপডেট
+--------------
+১. ZIP খুলে বিদ্যমান Vercel প্রজেক্টের সংযুক্ত Git রিপোজিটরির রুটে এই ফাইলগুলো রাখুন।
+   index.html, package.json ও api/ যেন একই রুটে থাকে।
+২. Framework Preset হিসেবে Other ব্যবহার করুন। Build command প্রয়োজন নেই।
+   Vercel ডিফল্ট রুট থেকে স্থির ফাইল এবং api/ থেকে ফাংশন নেবে।
+৩. প্রিভিউ ডেপ্লয়মেন্টে পরীক্ষা করে তারপর একই Vercel প্রজেক্টে প্রোডাকশন আপডেট দিন।
+   শুধু স্থির পেজ পরীক্ষার জন্য python3 -m http.server 8000 ব্যবহার করা যায়।
 
-Current prototype includes:
-- Bangla / English language switch
-- Acid-base titration learning model with pH indicator (simplified educational curve)
-- Electrolysis ion movement concept model
-- Water molecule geometry concept model
-- Starter element explorer (selected elements only)
+Firebase ও অ্যাকাউন্ট
+--------------------
+১. Firebase প্রজেক্টে Web App যোগ করে তার পাবলিক Web config firebase-config.js-এ দিন।
+২. Authentication-এ Email/Password চালু করুন। Auth-এ প্রথম অ্যাডমিন ব্যবহারকারী তৈরি করুন।
+৩. Firestore তৈরি করে firestore.rules ফাইলের নিয়ম প্রকাশ করুন। Firebase Console-এ admins
+   collection-এ অ্যাডমিনের Authentication UID-কে document ID করে একটি ডকুমেন্ট তৈরি করুন।
+   ডকুমেন্টে role: admin স্ট্রিং রাখা যেতে পারে। ব্রাউজার থেকে এই অনুমতি দেওয়া যায় না।
+৪. Firebase Authentication-এ শিক্ষার্থীদের ইমেইল অ্যাকাউন্ট তৈরি করুন। অ্যাডমিন প্যানেলের
+   শিক্ষার্থী ট্যাবে সেই UID, নাম, ব্যাচ, রোল ও আন্তর্জাতিক ফরম্যাটে অভিভাবকের ফোন দিন।
+   পৃথক অ্যাডমিন ও শিক্ষার্থী অ্যাকাউন্ট দিয়ে ব্যক্তিগত রেকর্ডের প্রবেশাধিকার যাচাই করুন।
+৫. অ্যাডমিন প্যানেলের শিক্ষক পরিচিতিতে আসল ছবির URL, বায়ো ও শিক্ষাগত যোগ্যতা দিন।
+   নোটিশ, রুটিন, পরীক্ষা, ভর্তি আবেদন ও কনটেন্ট নিজ নিজ ট্যাবে পাওয়া যাবে।
+   কনটেন্ট লিংক সাধারণভাবে ওয়েব থেকে খোলা গেলে কেউ সরাসরি URL পেয়ে সেটিও খুলতে পারবে।
+   ভর্তি শিক্ষার্থীদের জন্য সংরক্ষিত ফাইল অবশ্যই অ্যাক্সেস-নিয়ন্ত্রিত জায়গায় রাখুন।
+   সাইটে অন্তর্ভুক্ত প্রাথমিক পাঠ ও কার্যক্রম পাবলিক। নতুন কনটেন্টের দৃশ্যমানতা
+   প্রকাশের সময় ঠিক করা যায়। অ্যাডমিনের অনুমতি ছাড়া আবেদন দেখা যায় না।
 
-Important:
-This is Phase 1 frontend prototype. Student accounts, admin content management, database,
-complete 3D model manipulation, full periodic table and scientifically validated advanced
-simulations are not connected yet. The simulations are educational approximations, not
-instructions for conducting unsupervised chemical experiments.
+অনুপস্থিতির SMS
+----------------
+Vercel-এর Environment Variables-এ FIREBASE_PROJECT_ID, TWILIO_ACCOUNT_SID,
+TWILIO_AUTH_TOKEN এবং TWILIO_FROM দিন, তারপর পুনরায় ডেপ্লয় করুন।
+পাবলিক JavaScript-এ কখনো Twilio টোকেন রাখবেন না।
+প্রোভাইডারে বাংলাদেশে মেসেজ পাঠাতে অনুমোদিত sender ও অভিভাবকের সম্মত নম্বর ব্যবহার করুন।
+অনুপস্থিতি সেভ হলে সাইট একবার SMS পাঠানোর চেষ্টা করে। অ্যাডমিনের রেকর্ডে SMS বাটনে
+ক্লিক করলে পাঠানো মেসেজের ডেলিভারি স্ট্যাটাস দেখা যায়। SMS ফলাফল sending বা unknown
+থাকলে আগে প্রোভাইডারের লগে যাচাই করুন, যাতে ভুল করে একই মেসেজ দুইবার না যায়।
+পরবর্তীতে হাজিরা সংশোধন করলে সেটি প্রোফাইলে প্রতিফলিত হয় ও পুরোনো SMS রেকর্ড থাকে।
+
+অন্তর্ভুক্ত উপকরণ
+----------------
+প্রথম ও দ্বিতীয় পত্রের ১০ অধ্যায়ের সূচি, প্রতিটি অধ্যায়ে ছোট ইন্টারঅ্যাকটিভ কার্যক্রম
+অথবা ল্যাব, এবং MCQ ও উত্তর ব্যাখ্যা। বিদ্যমান টাইট্রেশন, তড়িৎ বিশ্লেষণ ও পর্যায়
+সারণির পাশাপাশি নতুন শিখা পরীক্ষা এবং পানির অণুর 2D/3D মডেল আছে।
+গুণগত রসায়নে শিখা পরীক্ষার ভিডিও, স্লাইড টেমপ্লেট এবং ইংরেজি PDF নোট ও প্র্যাকটিস
+যুক্ত আছে। দাগানো বই, পূর্ণ স্লাইড, বাড়তি PDF, ভিডিও ও নতুন পরীক্ষা অ্যাডমিন প্যানেল
+থেকে পর্যায়ক্রমে যোগ করুন।

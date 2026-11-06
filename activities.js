@@ -1,0 +1,20 @@
+export const activities = [
+  ["1-1","ল্যাব নিরাপত্তা · অ্যাসিড পাতলাকরণ","Lab safety · acid dilution","ঘন অ্যাসিড পাতলা করতে কোন ক্রমটি বেছে নেবে?","Which order should you use to dilute concentrated acid?",
+    ["পানিতে ধীরে অ্যাসিড যোগ","অ্যাসিডে পানি যোগ"],["Slowly add acid to water","Add water to acid"],0,"পাতলাকরণে তাপ বের হয়। অ্যাসিডে পানি ঢাললে স্থানীয়ভাবে দ্রুত উত্তপ্ত হয়ে ছিটকে পড়তে পারে।","Dilution releases heat. Adding water to concentrated acid can cause local overheating and splashing."],
+  ["1-3","বন্ধন ও আকৃতি · অণু তুলনা","Bonding and shape · compare molecules","কোন অণুর কেন্দ্রীয় পরমাণুতে দুটি একাকী ইলেকট্রন জোড় আছে?","Which molecule has two lone pairs on its central atom?",
+    ["CO₂","H₂O","CH₄"],["CO₂","H₂O","CH₄"],1,"পানির অক্সিজেনে দুটি বন্ধন জোড় ও দুটি একাকী জোড় থাকে। অণুটি বাঁকা।","Oxygen in water has two bonding pairs and two lone pairs. The molecule is bent."],
+  ["1-4","রাসায়নিক সাম্য · চাপের প্রভাব","Chemical equilibrium · effect of pressure","তাপমাত্রা স্থির রেখে N₂ + 3H₂ ⇌ 2NH₃ সাম্যের আয়তন কমালে সাম্য কোন দিকে সরে?","At constant temperature, which way does N₂ + 3H₂ ⇌ 2NH₃ shift when volume decreases?",
+    ["বামে","ডানে","অপরিবর্তিত"],["Left","Right","Unchanged"],1,"ডান দিকে গ্যাসের মোল সংখ্যা কম। আয়তন কমিয়ে চাপ বাড়ালে সেই দিকটি অনুকূল হয়।","The right-hand side has fewer moles of gas, so reducing the volume favours that side."],
+  ["1-5","খাদ্য সংরক্ষণ · দ্রবণের তুলনা","Food preservation · compare solutions","চিনির ঘনত্ব বাড়ালে সাধারণত খাদ্যের জলীয় সক্রিয়তা কী হয়?","What generally happens to water activity as sugar concentration increases?",
+    ["কমে","বাড়ে","অপরিবর্তিত"],["Decreases","Increases","Unchanged"],0,"চিনি দ্রবণে পানির সক্রিয়তা কমায়। কম জলীয় সক্রিয়তা অনেক অণুজীবের বৃদ্ধি সীমিত করে।","Sugar lowers water activity, limiting the growth of many microorganisms."],
+  ["2-1","পানির কঠোরতা · ফোটানোর প্রভাব","Water hardness · effect of boiling","ফোটালে কোন ধরনের কঠোরতা কমানো যায়?","Which type of water hardness can be reduced by boiling?",
+    ["অস্থায়ী কঠোরতা","স্থায়ী কঠোরতা"],["Temporary hardness","Permanent hardness"],0,"বাইকার্বনেটজনিত অস্থায়ী কঠোরতায় ফোটালে অদ্রবণীয় পদার্থের অধঃক্ষেপ তৈরি হয়।","Boiling water with bicarbonate hardness produces an insoluble precipitate."],
+  ["2-2","জৈব রসায়ন · ব্রোমিন পানির পরীক্ষা","Organic chemistry · bromine water test","স্বাভাবিক পরীক্ষার শর্তে কোনটি ব্রোমিন পানির বর্ণ দূর করে?","Under typical test conditions, which compound decolourises bromine water?",
+    ["ইথেন","ইথিন"],["Ethane","Ethene"],1,"ইথিনের দ্বিবন্ধনে ব্রোমিন যোজন হয়।","Bromine adds across the double bond of ethene."],
+  ["2-3","টাইট্রেশন · সমতুল্য বিন্দু","Titration · equivalence point","সমান মোলার ঘনত্বের ২৫ mL HCl প্রশমিত করতে কত mL NaOH লাগে?","How much NaOH of the same molarity neutralises 25 mL HCl?",
+    ["১২.৫ mL","২৫ mL","৫০ mL"],["12.5 mL","25 mL","50 mL"],1,"HCl ও NaOH ১:১ মোল অনুপাতে বিক্রিয়া করে। সমান ঘনত্বে আয়তনও সমান।","HCl and NaOH react in a 1:1 mole ratio. At equal molarity, the volumes are equal."],
+  ["2-4","তড়িৎ বিশ্লেষণ · ক্যাথোড নির্বাচন","Electrolysis · choose the cathode process","ক্যাথোডে কোন প্রক্রিয়া ঘটে?","What takes place at the cathode?",
+    ["জারণ","বিজারণ"],["Oxidation","Reduction"],1,"ক্যাথোডে কণা ইলেকট্রন গ্রহণ করে।","At the cathode, particles gain electrons."],
+  ["2-5","শিল্প রসায়ন · অ্যামোনিয়া উৎপাদন","Industrial chemistry · ammonia production","হ্যাবার প্রক্রিয়ায় লোহার প্রভাবক যোগ করলে সাম্যে পৌঁছানোর সময় কী হয়?","How does the iron catalyst affect the time to reach equilibrium in the Haber process?",
+    ["কমে","বাড়ে","অপরিবর্তিত"],["Decreases","Increases","Unchanged"],0,"প্রভাবক বিক্রিয়ার গতি বাড়ায়। নির্দিষ্ট তাপমাত্রায় সাম্যের অবস্থান বদলায় না।","The catalyst speeds up the reaction. At a given temperature it does not shift the equilibrium position."]
+].map(([chapter,name,nameEn,title,titleEn,options,optionsEn,answer,explanation,explanationEn])=>({chapter,name,nameEn,title,titleEn,options,optionsEn,answer,explanation,explanationEn,public:true}));
