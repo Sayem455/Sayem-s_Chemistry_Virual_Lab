@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css"><link rel="stylesheet" href="portal.css">
 </head>
 <body>
   <header class="site-header">
@@ -21,14 +21,14 @@
       <nav id="mainNav">
         <a href="#home" data-bn="হোম" data-en="Home">হোম</a>
         <a href="#courses" data-bn="কোর্স" data-en="Courses">কোর্স</a>
-        <a href="#resources" data-bn="স্টাডি ম্যাটেরিয়াল" data-en="Study Materials">স্টাডি ম্যাটেরিয়াল</a>
+        <a href="portal.html#learn" data-bn="স্টাডি ম্যাটেরিয়াল" data-en="Study Materials">স্টাডি ম্যাটেরিয়াল</a>
         <a href="lab.html" data-bn="ভার্চুয়াল ল্যাব" data-en="Virtual Lab">ভার্চুয়াল ল্যাব</a>
-        <a href="#practice" data-bn="অনুশীলন" data-en="Practice">অনুশীলন</a>
+        <a href="portal.html#practice" data-bn="অনুশীলন" data-en="Practice">অনুশীলন</a>
         <a href="#contact" data-bn="যোগাযোগ" data-en="Contact">যোগাযোগ</a>
-      </nav>
+      <a href="#updates" data-bn="নোটিশ" data-en="Notices">নোটিশ</a><a href="#admission" data-bn="ভর্তি" data-en="Admission">ভর্তি</a></nav>
       <div class="nav-actions">
         <button class="language-btn" id="languageToggle">EN</button>
-        <button class="btn btn-outline login-open" data-bn="লগইন" data-en="Student Login">লগইন</button>
+        <a href="portal.html#dashboard" class="btn btn-outline" data-bn="লগইন" data-en="Student Login">লগইন</a>
       </div>
     </div>
   </header>
@@ -43,7 +43,7 @@
           <p data-bn="কঠিন কনসেপ্টকে সহজ করে বুঝি, নিয়মিত অনুশীলন করি এবং পরীক্ষার প্রস্তুতি গড়ে তুলি পরিকল্পিতভাবে।" data-en="Understand difficult concepts with clarity, practise consistently, and build exam confidence with a structured learning path.">কঠিন কনসেপ্টকে সহজ করে বুঝি, নিয়মিত অনুশীলন করি এবং পরীক্ষার প্রস্তুতি গড়ে তুলি পরিকল্পিতভাবে।</p>
           <div class="hero-buttons">
             <a class="btn btn-primary" href="#courses"><span data-bn="কোর্স দেখুন" data-en="Explore Courses">কোর্স দেখুন</span> <b>↗</b></a>
-            <button class="btn btn-glass login-open" data-bn="শিক্ষার্থী লগইন" data-en="Student Login">শিক্ষার্থী লগইন</button>
+            <a href="portal.html#dashboard" class="btn btn-glass" data-bn="শিক্ষার্থী লগইন" data-en="Student Login">শিক্ষার্থী লগইন</a>
           </div>
           <div class="hero-proof">
             <div class="proof-avatars"><span>S</span><span>C</span><span>+</span></div>
@@ -57,7 +57,7 @@
           <div class="glass-card">
             <div class="glass-top"><span class="dot"></span><span class="dot"></span><span class="dot"></span><small>CHEMISTRY LAB</small></div>
             <div class="atom"><span class="nucleus">C</span><i class="electron e1"></i><i class="electron e2"></i><i class="electron e3"></i></div>
-            <div class="formula">H₂ + O₂ <b>→</b> H₂O</div>
+            <div class="formula">2H₂ + O₂ <b>→</b> H₂O</div>
             <div class="lab-caption"><span class="lab-icon">⚗</span><span><strong data-bn="কনসেপ্ট ক্লিয়ার" data-en="Concept Clarity">কনসেপ্ট ক্লিয়ার</strong><small data-bn="ধাপে ধাপে শেখা" data-en="Learn step by step">ধাপে ধাপে শেখা</small></span><span class="check">✓</span></div>
           </div>
           <div class="floating-chip chip-top">C₆H₆ <small>BENZENE</small></div>
@@ -104,10 +104,10 @@
           <p data-bn="পরিকল্পিতভাবে পড়াশোনা ও অনুশীলনের জন্য প্রয়োজনীয় উপকরণ।" data-en="Useful materials for structured study and consistent practice.">পরিকল্পিতভাবে পড়াশোনা ও অনুশীলনের জন্য প্রয়োজনীয় উপকরণ।</p>
         </div>
         <div class="resource-grid">
-          <article class="resource-card"><div class="resource-icon purple">▤</div><h3 data-bn="ক্লাস নোট ও PDF" data-en="Class Notes & PDFs">ক্লাস নোট ও PDF</h3><p data-bn="অধ্যায়ভিত্তিক নোট, শিটস ও গুরুত্বপূর্ণ তথ্য।" data-en="Chapter-wise notes, sheets and key information.">অধ্যায়ভিত্তিক নোট, শিটস ও গুরুত্বপূর্ণ তথ্য।</p><a href="#contact">Explore ↗</a></article>
-          <article class="resource-card"><div class="resource-icon cyan">▶</div><h3 data-bn="ভিডিও ক্লাস" data-en="Video Classes">ভিডিও ক্লাস</h3><p data-bn="জটিল বিষয় বুঝতে সাজানো ভিডিও লেসন।" data-en="Structured video lessons to understand complex topics.">জটিল বিষয় বুঝতে সাজানো ভিডিও লেসন।</p><a href="#contact">Explore ↗</a></article>
-          <article class="resource-card"><div class="resource-icon orange">✎</div><h3 data-bn="MCQ ও CQ অনুশীলন" data-en="MCQ & CQ Practice">MCQ ও CQ অনুশীলন</h3><p data-bn="বোর্ড ও ভর্তি প্রস্তুতির জন্য প্রশ্ন অনুশীলন।" data-en="Question practice for board and admission preparation.">বোর্ড ও ভর্তি প্রস্তুতির জন্য প্রশ্ন অনুশীলন।</p><a href="#practice">Explore ↗</a></article>
-          <article class="resource-card"><div class="resource-icon green">▣</div><h3 data-bn="পরীক্ষা ও ফলাফল" data-en="Exams & Results">পরীক্ষা ও ফলাফল</h3><p data-bn="নিজের প্রস্তুতি যাচাই ও অগ্রগতি পর্যবেক্ষণ।" data-en="Check your preparation and track your progress.">নিজের প্রস্তুতি যাচাই ও অগ্রগতি পর্যবেক্ষণ।</p><a href="#practice">Explore ↗</a></article>
+          <article class="resource-card"><div class="resource-icon purple">▤</div><h3 data-bn="ক্লাস নোট ও PDF" data-en="Class Notes & PDFs">ক্লাস নোট ও PDF</h3><p data-bn="অধ্যায়ভিত্তিক নোট, শিটস ও গুরুত্বপূর্ণ তথ্য।" data-en="Chapter-wise notes, sheets and key information.">অধ্যায়ভিত্তিক নোট, শিটস ও গুরুত্বপূর্ণ তথ্য।</p><a href="portal.html#learn">Explore ↗</a></article>
+          <article class="resource-card"><div class="resource-icon cyan">▶</div><h3 data-bn="ভিডিও ক্লাস" data-en="Video Classes">ভিডিও ক্লাস</h3><p data-bn="জটিল বিষয় বুঝতে সাজানো ভিডিও লেসন।" data-en="Structured video lessons to understand complex topics.">জটিল বিষয় বুঝতে সাজানো ভিডিও লেসন।</p><a href="portal.html#learn">Explore ↗</a></article>
+          <article class="resource-card"><div class="resource-icon orange">✎</div><h3 data-bn="MCQ ও CQ অনুশীলন" data-en="MCQ & CQ Practice">MCQ ও CQ অনুশীলন</h3><p data-bn="বোর্ড ও ভর্তি প্রস্তুতির জন্য প্রশ্ন অনুশীলন।" data-en="Question practice for board and admission preparation.">বোর্ড ও ভর্তি প্রস্তুতির জন্য প্রশ্ন অনুশীলন।</p><a href="portal.html#practice">Explore ↗</a></article>
+          <article class="resource-card"><div class="resource-icon green">▣</div><h3 data-bn="পরীক্ষা ও ফলাফল" data-en="Exams & Results">পরীক্ষা ও ফলাফল</h3><p data-bn="নিজের প্রস্তুতি যাচাই ও অগ্রগতি পর্যবেক্ষণ।" data-en="Check your preparation and track your progress.">নিজের প্রস্তুতি যাচাই ও অগ্রগতি পর্যবেক্ষণ।</p><a href="portal.html#marks">Explore ↗</a></article>
           <article class="resource-card"><div class="resource-icon cyan">⚗</div><h3 data-bn="ভার্চুয়াল কেমিস্ট্রি ল্যাব" data-en="Virtual Chemistry Lab">ভার্চুয়াল কেমিস্ট্রি ল্যাব</h3><p data-bn="ইন্টারঅ্যাকটিভ পরীক্ষা, অণুর মডেল ও রসায়ন অন্বেষণ।" data-en="Explore interactive experiments, molecular models and chemistry concepts.">ইন্টারঅ্যাকটিভ পরীক্ষা, অণুর মডেল ও রসায়ন অন্বেষণ।</p><a href="lab.html" data-bn="ল্যাবে প্রবেশ ↗" data-en="Enter Lab ↗">ল্যাবে প্রবেশ ↗</a></article>
         </div>
       </div>
@@ -115,10 +115,19 @@
 
     <section class="practice-band" id="practice">
       <div class="container practice-inner">
-        <div><span class="section-kicker light" data-bn="নিয়মিত অনুশীলন" data-en="PRACTISE REGULARLY">নিয়মিত অনুশীলন</span><h2 data-bn="শুধু পড়লেই হবে না,<br><em>অনুশীলনেই দক্ষতা।</em>" data-en="Don't just study.<br><em>Practise to master.</em>">শুধু পড়লেই হবে না,<br><em>অনুশীলনেই দক্ষতা।</em></h2><p data-bn="MCQ, CQ এবং অধ্যায়ভিত্তিক পরীক্ষার মাধ্যমে নিজের প্রস্তুতি যাচাই করো।" data-en="Test your understanding with MCQs, creative questions and chapter-based exams.">MCQ, CQ এবং অধ্যায়ভিত্তিক পরীক্ষার মাধ্যমে নিজের প্রস্তুতি যাচাই করো।</p><button class="btn btn-white login-open" data-bn="শিক্ষার্থী হিসেবে প্রবেশ করো" data-en="Enter as a student">শিক্ষার্থী হিসেবে প্রবেশ করো</button></div>
+        <div><span class="section-kicker light" data-bn="নিয়মিত অনুশীলন" data-en="PRACTISE REGULARLY">নিয়মিত অনুশীলন</span><h2 data-bn="শুধু পড়লেই হবে না,<br><em>অনুশীলনেই দক্ষতা।</em>" data-en="Don't just study.<br><em>Practise to master.</em>">শুধু পড়লেই হবে না,<br><em>অনুশীলনেই দক্ষতা।</em></h2><p data-bn="MCQ, CQ এবং অধ্যায়ভিত্তিক পরীক্ষার মাধ্যমে নিজের প্রস্তুতি যাচাই করো।" data-en="Test your understanding with MCQs, creative questions and chapter-based exams.">MCQ, CQ এবং অধ্যায়ভিত্তিক পরীক্ষার মাধ্যমে নিজের প্রস্তুতি যাচাই করো।</p><a href="portal.html#dashboard" class="btn btn-white" data-bn="শিক্ষার্থী হিসেবে প্রবেশ করো" data-en="Enter as a student">শিক্ষার্থী হিসেবে প্রবেশ করো</a></div>
         <div class="practice-visual"><div class="practice-ring">A+</div><div class="mini-result"><small>YOUR NEXT STEP</small><strong>Learn → Practise → Improve</strong><span>Every chapter counts.</span></div><div class="chem-bubble">Na⁺</div><div class="chem-bubble bubble-two">OH⁻</div></div>
       </div>
     </section>
+
+    <section class="section" id="updates"><div class="container">
+      <div class="sc-grid">
+        <article class="sc-card"><h2 data-bn="HSC রসায়ন" data-en="HSC Chemistry">HSC রসায়ন</h2><p data-bn="প্রথম ও দ্বিতীয় পত্রের অধ্যায়, ল্যাব, মডেল ও অনুশীলন।" data-en="Explore both papers, experiments, models and practice.">প্রথম ও দ্বিতীয় পত্রের অধ্যায়, ল্যাব, মডেল ও অনুশীলন।</p><a href="portal.html#learn"><span data-bn="অধ্যায় দেখো" data-en="Browse chapters">অধ্যায় দেখো</span> →</a></article>
+        <article class="sc-card"><h2 data-bn="রুটিন, নোটিশ ও পরীক্ষা" data-en="Schedule, notices and exams">রুটিন, নোটিশ ও পরীক্ষা</h2><div id="public-notices"></div></article>
+        <article class="sc-card"><h2 data-bn="পরীক্ষার ফলাফল" data-en="Exam results">পরীক্ষার ফলাফল</h2><p data-bn="নিজের মার্কশিট দেখতে শিক্ষার্থী অ্যাকাউন্টে লগইন করো।" data-en="Sign in to view your own marksheets.">নিজের মার্কশিট দেখতে শিক্ষার্থী অ্যাকাউন্টে লগইন করো।</p><a href="portal.html#marks"><span data-bn="ফলাফল দেখো" data-en="View results">ফলাফল দেখো</span> →</a></article>
+      </div>
+      <article class="sc-card sc-teacher"><img id="teacher-photo" src="sayems-chemistry-logo.png" alt=""><div><h2 data-bn="শিক্ষক পরিচিতি" data-en="Meet the teacher">শিক্ষক পরিচিতি</h2><strong>S.M. Sayem Mahmud</strong><p id="teacher-bio">HSC Chemistry · Sayem’s Chemistry</p><p id="teacher-degree"></p></div></article>
+    </div></section>
 
     <section class="section contact-section" id="contact">
       <div class="container contact-box">
@@ -126,27 +135,21 @@
         <div class="contact-details"><div><span>⌖</span><p><small data-bn="ঠিকানা" data-en="Address">ঠিকানা</small><strong data-bn="সরদার প্লাজা (২য় তল), গভ. কলেজ মোড়, সাতক্ষীরা সদর।" data-en="Sardar Plaza (2nd Floor), Govt. College More, Satkhira Sadar.">সরদার প্লাজা (২য় তল), গভ. কলেজ মোড়, সাতক্ষীরা সদর।</strong></p></div><div><span>☎</span><p><small data-bn="ফোন" data-en="Phone">ফোন</small><strong>01936 455 773</strong></p></div><a class="btn btn-primary" href="tel:01936455773" data-bn="কল করুন ↗" data-en="Call now ↗">কল করুন ↗</a></div>
       </div>
     </section>
+    <section class="section" id="admission"><div class="container"><article class="sc-card">
+      <h2 data-bn="ভর্তির আবেদন" data-en="Admission application">ভর্তির আবেদন</h2>
+      <form id="admission-form" class="sc-form">
+        <label><span data-bn="শিক্ষার্থীর নাম" data-en="Student name">শিক্ষার্থীর নাম</span><input name="name" maxlength="100" required></label>
+        <label><span data-bn="যোগাযোগের নম্বর" data-en="Contact number">যোগাযোগের নম্বর</span><input type="tel" name="phone" pattern="\+?[0-9]{10,15}" required></label>
+        <label><span data-bn="পছন্দের কোর্স বা ব্যাচ" data-en="Preferred course or batch">পছন্দের কোর্স বা ব্যাচ</span><input name="batch" maxlength="100" required></label>
+        <button class="btn btn-primary" disabled><span data-bn="আবেদন পাঠাও" data-en="Submit application">আবেদন পাঠাও</span></button>
+        <p id="admission-status" role="status"></p>
+      </form>
+    </article></div></section>
   </main>
 
-  <footer><div class="container footer-inner"><a class="brand" href="#home"><img class="brand-logo" src="sayems-chemistry-logo.png" alt="Sayem’s Chemistry logo"><span class="brand-copy"><strong>Sayem’s Chemistry</strong><small>Where Concepts Create Confidence</small></span></a><p>© <span id="year"></span> Sayem’s Chemistry. <span data-bn="সর্বস্বত্ব সংরক্ষিত।" data-en="All rights reserved.">সর্বস্বত্ব সংরক্ষিত।</span></p><a href="#home" class="back-top">↑</a></div></footer>
+  <footer><div class="container footer-inner"><a class="brand" href="#home"><img class="brand-logo" src="sayems-chemistry-logo.png" alt="Sayem’s Chemistry logo"><span class="brand-copy"><strong>Sayem’s Chemistry</strong><small>Where Concepts Create Confidence</small></span></a><p>© <span id="year"></span> Sayem’s Chemistry. <span data-bn="সর্বস্বত্ব সংরক্ষিত।" data-en="All rights reserved.">সর্বস্বত্ব সংরক্ষিত।</span></p><a href="#home" class="back-top">↑</a></div><a class="sc-admin-link" href="admin.html">Admin</a></footer>
 
-  <div class="modal-backdrop" id="loginModal" aria-hidden="true">
-    <div class="login-modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-      <button class="modal-close" id="modalClose" aria-label="Close">×</button>
-      <div class="modal-logo">S<span>+</span></div>
-      <span class="section-kicker" data-bn="শিক্ষার্থী পোর্টাল" data-en="STUDENT PORTAL">শিক্ষার্থী পোর্টাল</span>
-      <h2 id="modalTitle" data-bn="স্বাগতম!" data-en="Welcome back!">স্বাগতম!</h2>
-      <p data-bn="ডেমো লগইন ফর্ম — প্রকৃত অ্যাকাউন্ট পরবর্তী ধাপে চালু হবে।" data-en="Demo login form — real student accounts will be enabled in the next phase.">ডেমো লগইন ফর্ম — প্রকৃত অ্যাকাউন্ট পরবর্তী ধাপে চালু হবে।</p>
-      <form id="demoLogin">
-        <label for="studentEmail" data-bn="ইমেইল বা শিক্ষার্থী আইডি" data-en="Email or Student ID">ইমেইল বা শিক্ষার্থী আইডি</label>
-        <input id="studentEmail" type="text" placeholder="student@example.com" required>
-        <label for="studentPassword" data-bn="পাসওয়ার্ড" data-en="Password">পাসওয়ার্ড</label>
-        <input id="studentPassword" type="password" placeholder="••••••••" required>
-        <button class="btn btn-primary full-width" type="submit" data-bn="ডেমো লগইন" data-en="Demo Login">ডেমো লগইন</button>
-        <div class="form-message" id="formMessage" role="status"></div>
-      </form>
-    </div>
-  </div>
   <script src="script.js"></script>
+  <script type="module" src="home.js"></script>
 </body>
 </html>

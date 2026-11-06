@@ -1,0 +1,14 @@
+<!doctype html><html lang="bn"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Interactive experiments | Sayem’s Chemistry</title><link rel="stylesheet" href="portal.css">
+<body class="sc-page"><header class="sc-top"><div class="sc-shell sc-nav"><a class="sc-brand" href="index.html"><img src="sayems-chemistry-logo.png" alt="">Sayem’s Chemistry</a><div class="sc-actions"><a href="portal.html#learn">Student portal</a><a href="lab.html">Virtual Lab</a><button id="language">EN</button></div></div></header>
+<div class="sc-shell"><main><div class="sc-intro"><h1 data-bn="ইন্টারঅ্যাকটিভ ল্যাব" data-en="Interactive lab">ইন্টারঅ্যাকটিভ ল্যাব</h1></div>
+<section class="sc-card" id="flame"><h2 data-bn="শিখা পরীক্ষা" data-en="Flame test">শিখা পরীক্ষা</h2>
+<p data-bn="আয়ন বেছে শিখার বর্ণ দেখো।" data-en="Choose an ion and observe the flame colour.">আয়ন বেছে শিখার বর্ণ দেখো।</p>
+<div class="sc-actions"><button data-ion="Na">Na⁺</button><button data-ion="Ca">Ca²⁺</button><button data-ion="Ba">Ba²⁺</button></div>
+<svg class="sc-model" width="260" height="180" viewBox="0 0 260 180" aria-hidden="true"><path id="flame-shape" d="M130 26 C 143 58 116 62 142 81 Q 155 78 156 63 C 190 126 146 145 130 142 C 90 140 87 105 104 83 C 104 104 132 88 130 26Z"/><rect x="119" y="140" width="22" height="25" rx="4" fill="#334155"/><rect x="92" y="164" width="76" height="8" rx="4" fill="#334155"/></svg>
+<p id="colour" role="status"></p></section>
+<section class="sc-card" id="water"><h2 data-bn="পানির অণু · 2D ও 3D" data-en="Water molecule · 2D and 3D">পানির অণু · 2D ও 3D</h2>
+<p data-bn="H–O–H বন্ধন কোণ প্রায় ১০৪.৫°। স্লাইডার দিয়ে 3D মডেল ঘোরাও।" data-en="The H–O–H bond angle is about 104.5°. Use the sliders to rotate the 3D model.">H–O–H বন্ধন কোণ প্রায় ১০৪.৫°। স্লাইডার দিয়ে 3D মডেল ঘোরাও।</p>
+<div class="sc-actions"><button data-model="2d">2D</button><button data-model="3d">3D</button></div>
+<div id="rotation" class="sc-form"><label><span data-bn="অনুভূমিক ঘূর্ণন" data-en="Horizontal rotation">অনুভূমিক ঘূর্ণন</span><input type="range" min="-180" max="180" value="25" id="yaw"></label><label><span data-bn="উল্লম্ব ঘূর্ণন" data-en="Vertical rotation">উল্লম্ব ঘূর্ণন</span><input type="range" min="-180" max="180" value="25" id="pitch"></label></div>
+<canvas class="sc-model" width="390" height="260" id="molecule" aria-label="Water molecule · O and two H atoms"></canvas></section><div id="activities"></div></main></div>
+<script type="module" src="experiments.js"></script></body></html>
