@@ -8,3 +8,17 @@
 #entries .sc-table:has(th:nth-child(7)) button {
   white-space: nowrap;
 }
+
+.sc-slide-group {
+  margin-block: 0.4rem;
+}
+
+.sc-slide-group summary {
+  padding-block: 0.45rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.sc-slide-group li + li {
+  margin-top: 0.4rem;
+}

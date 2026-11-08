@@ -1,5 +1,6 @@
 import {$, bindAuth, connect, escapeHTML as h, lang, languageButton, rows, safeURL, setupMessage, tr} from "./shared.js";
 import {chapters, starter, starterQuiz, types} from "./content.js";
+import {qualitativeSlideGroups} from "./qualitative-slides.js";
 let chapter = "1-2";
 let resources = [];
 let quizzes = [];
@@ -14,6 +15,12 @@ function resourceLink(item) {
   const url = safeURL(item.url);
   return url ? '<li><a href="'+h(url)+'">'+h(tr(item.title,item.titleEn || item.title))+'</a></li>' : "";
 }
+function renderSlideGroups() {
+  return qualitativeSlideGroups.map(({title, titleEn, slides}) =>
+    '<details class="sc-slide-group"><summary>'+h(tr(title,titleEn))+'</summary><ul>'+
+    slides.map(resourceLink).join("")+'</ul></details>'
+  ).join("");
+}
 function render() {
   const content = $("content");
   content.innerHTML = '<div class="sc-actions sc-tabs"><a class="sc-button" href="#learn">'+tr("অধ্যায়","Chapters")+'</a><a class="sc-button" href="#practice">MCQ</a><a class="sc-button" href="#dashboard">'+tr("আমার ড্যাশবোর্ড","My dashboard")+'</a><a class="sc-button" href="lab.html">Virtual Lab ↗</a></div>'+
@@ -27,7 +34,10 @@ function renderChapter() {
   const items = [...starter,...resources].filter(item=>item.chapter===chapter);
   const groups = Object.entries(types).map(([type,names])=>{
     const links = items.filter(item=>item.type===type).map(resourceLink).join("");
-    return '<article class="sc-card"><h3>'+names[lang()==="en"?1:0]+'</h3>'+(links ? '<ul>'+links+'</ul>' : '<p>'+tr("উপকরণ প্রকাশের অপেক্ষায়।","Materials pending publication.")+'</p>')+'</article>';
+    const slideGroups = type === "slides" && chapter === "1-2" ? renderSlideGroups() : "";
+    const resourceList = links ? '<ul>'+links+'</ul>' : "";
+    return '<article class="sc-card"><h3>'+names[lang()==="en"?1:0]+'</h3>'+
+      (resourceList+slideGroups || '<p>'+tr("উপকরণ প্রকাশের অপেক্ষায়।","Materials pending publication.")+'</p>')+'</article>';
   }).join("");
   const questions = [...starterQuiz,...quizzes].filter(q=>q.chapter===chapter && Array.isArray(q.options));
   $("chapter-content").innerHTML = '<div class="sc-grid">'+groups+'</div><section id="practice" class="sc-card sc-quiz"><h2>'+tr("MCQ প্র্যাকটিস","MCQ practice")+'</h2>'+
