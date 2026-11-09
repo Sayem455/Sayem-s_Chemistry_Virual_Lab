@@ -7,7 +7,7 @@ import { getAuth } from "firebase-admin/auth";
 import { getFirestore } from "firebase-admin/firestore";
 import { getStorage } from "firebase-admin/storage";
 import { firebaseConfig } from "../firebase-config.js";
-import { overdueFees } from "../server/fees.js";
+import { overdueFees } from "../server/server/fees.js";
 
 const fileTypes = {
   ".pdf": "application/pdf",
