@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="bn">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Lab balances | Sayem’s Chemistry</title>
+  <link rel="stylesheet" href="portal.css">
+  <link rel="stylesheet" href="lab-balances.css">
+</head>
+<body class="sc-page">
+<header class="sc-top">
+  <div class="sc-shell sc-nav">
+    <a class="sc-brand" href="index.html"><img src="sayems-chemistry-logo.png" alt="">Sayem’s Chemistry</a>
+    <div class="sc-actions">
+      <a href="lab-safety.html" data-bn="ল্যাব নিরাপত্তা" data-en="Lab safety">ল্যাব নিরাপত্তা</a>
+      <a href="experiments.html#chapters" data-bn="অধ্যায়ভিত্তিক ল্যাব" data-en="Chapter labs">অধ্যায়ভিত্তিক ল্যাব</a>
+      <button type="button" id="language">EN</button>
+    </div>
+  </div>
+</header>
+<svg class="balance-assets" width="0" height="0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="sample-metal" x1="0" y1="0" x2="0" y2="1">
+      <stop stop-color="#f7d48f"/>
+      <stop offset="1" stop-color="#a76529"/>
+    </linearGradient>
+    <radialGradient id="sample-glass" cx=".32" cy=".25" r=".75">
+      <stop stop-color="#e1ffff"/>
+      <stop offset=".55" stop-color="#60b9d0"/>
+      <stop offset="1" stop-color="#24718e"/>
+    </radialGradient>
+    <g id="sample-metal-slug">
+      <path d="M-27-13Q-27-6 0-4Q27-6 27-13v-13h-54z" fill="url(#sample-metal)" stroke="#815228" stroke-width="1.6"/>
+      <ellipse cy="-26" rx="27" ry="6.5" fill="#f5ce81" stroke="#815228" stroke-width="1.6"/>
+      <path d="M-17-18v7M-11-17v8" stroke="#ffe5ad" stroke-width="1.5" stroke-linecap="round"/>
+    </g>
+    <g id="sample-glass-beads" fill="url(#sample-glass)" stroke="#2a778d" stroke-width="1.4">
+      <circle cx="-16" cy="-14" r="10"/>
+      <circle cx="14" cy="-14" r="10"/>
+      <circle cy="-20" r="12"/>
+    </g>
+    <g id="sample-ceramic">
+      <path d="M-24-12l5-16 23-6 20 11-2 15-24 5z" fill="#efdebd" stroke="#93684f" stroke-width="1.5"/>
+      <path d="M-19-28l23-6 20 11-26 7z" fill="#fff2d9" stroke="#93684f" stroke-width="1.5"/>
+      <path d="M-2-16l26-7-2 15-24 5z" fill="#d0a882" stroke="#93684f" stroke-width="1.5"/>
+    </g>
+    <g id="balance-weight">
+      <path d="M-9 0h18l-2-12H-7z" fill="#687e98" stroke="#314e72" stroke-width="1.2"/>
+      <rect x="-3" y="-15" width="6" height="3" rx="1" fill="#b6c9db" stroke="#314e72" stroke-width="1"/>
+    </g>
+    <path id="balance-boat" d="M-38-8h76l-10 8h-56z" fill="#d3e7f1" fill-opacity=".72" stroke="#638ba0" stroke-width="1.5"/>
+  </defs>
+</svg>
+<main class="sc-shell balance-lab">
+  <div class="sc-intro">
+    <p class="balance-kicker" data-bn="HSC রসায়ন · ১ম পত্র · অধ্যায় ১" data-en="HSC Chemistry · Paper 1 · Chapter 1">HSC রসায়ন · ১ম পত্র · অধ্যায় ১</p>
+    <h1 data-bn="রাসায়নিক ও ডিজিটাল নিক্তি" data-en="Chemical and digital balances">রাসায়নিক ও ডিজিটাল নিক্তি</h1>
+    <p data-bn="একটি নমুনা বেছে যান্ত্রিক নিক্তিতে সাম্য আনো। তারপর একই নমুনার ডিজিটাল পাঠ তুলনা করো।" data-en="Choose a sample and balance it on the mechanical instrument. Then compare the two digital readings for the same sample.">একটি নমুনা বেছে যান্ত্রিক নিক্তিতে সাম্য আনো। তারপর একই নমুনার ডিজিটাল পাঠ তুলনা করো।</p>
+  </div>
+  <div class="sc-card balance-sample-bar">
+    <label for="balance-sample" data-bn="মাপার বস্তু" data-en="Object to weigh">মাপার বস্তু</label>
+    <select class="sc-select" id="balance-sample">
+      <option value="metal">পিতলের টুকরা</option>
+      <option value="glass">কাচের গুটি</option>
+      <option value="ceramic">সিরামিকের টুকরা</option>
+    </select>
+    <nav class="balance-jump">
+      <a href="#bunge" data-bn="পল বুংগি নিক্তি" data-en="Paul Bunge balance">পল বুংগি নিক্তি</a>
+      <a href="#digital" data-bn="ডিজিটাল নিক্তি" data-en="Digital balances">ডিজিটাল নিক্তি</a>
+      <a href="#solutions" data-bn="দ্রবণ তৈরি ও ঘনমাত্রা" data-en="Solution preparation and molarity">দ্রবণ তৈরি ও ঘনমাত্রা</a>
+    </nav>
+  </div>
+  <section class="sc-card" id="bunge">
+    <h2 data-bn="পল বুংগি রাসায়নিক নিক্তি" data-en="Paul Bunge chemical balance">পল বুংগি রাসায়নিক নিক্তি</h2>
+    <p data-bn="বাঁ পাল্লায় নমুনা আছে। ডান পাল্লায় বাটখারা বসাও। রাইডার সরিয়ে বিম ছাড়ো, তারপর সাম্য পরীক্ষা করো।" data-en="The sample is on the left pan. Load weights on the right pan, move the rider, then release the beam to check the balance.">বাঁ পাল্লায় নমুনা আছে। ডান পাল্লায় বাটখারা বসাও। রাইডার সরিয়ে বিম ছাড়ো, তারপর সাম্য পরীক্ষা করো।</p>
+    <figure class="balance-figure" id="balance-figure">
+      <div class="balance-diagram">
+        <svg viewBox="0 0 640 300" class="balance-bunge" aria-hidden="true">
+          <defs>
+            <linearGradient id="balance-frame" x2="0" y2="1">
+              <stop stop-color="#edf7fb"/><stop offset="1" stop-color="#d2e4ec"/>
+            </linearGradient>
+            <linearGradient id="balance-brass" x2="0" y2="1">
+              <stop stop-color="#fae5a3"/><stop offset="1" stop-color="#a87836"/>
+            </linearGradient>
+          </defs>
+          <rect x="20" y="19" width="600" height="250" rx="13" fill="url(#balance-frame)" stroke="#90b0c4" stroke-width="3"/>
+          <path d="M38 32h565M47 43v115M594 43v115" fill="none" stroke="#fff" stroke-opacity=".9" stroke-width="3" stroke-linecap="round"/>
+          <rect x="27" y="260" width="586" height="22" rx="8" fill="#304a69"/>
+          <path d="M73 282v7h30v-7m434 0v7h30v-7" fill="none" stroke="#22364d" stroke-width="5"/>
+          <path d="M289 258h62v-11h-18V111h-26v136h-18z" fill="url(#balance-brass)" stroke="#8e6636" stroke-width="2"/>
+          <rect x="258" y="226" width="124" height="30" rx="6" fill="#f6fbff" stroke="#8aa9bc" stroke-width="2"/>
+          <path d="M271 234h98m-98 0v5m24-5v5m25-5v8m25-8v5m24-5v5" fill="none" stroke="#577892" stroke-width="1.5"/>
+          <text x="320" y="252" text-anchor="middle" font-size="11" font-family="sans-serif" fill="#345570">0</text>
+          <g id="balance-beam">
+            <path d="M105 107l196-5h38l196 5v13l-196 5h-38l-196-5z" fill="url(#balance-brass)" stroke="#81582b" stroke-width="2"/>
+            <path d="M91 113h18m422 0h18" stroke="#6f5938" stroke-width="5" stroke-linecap="round"/>
+            <g id="balance-ticks" font-size="13" font-family="sans-serif" font-weight="700" text-anchor="middle" fill="#294563"></g>
+            <path d="M320 119v112" stroke="#42617b" stroke-width="2.5"/>
+            <path d="M315 223l5 10 5-10z" fill="#42617b"/>
+            <g id="balance-rider">
+              <path d="M-8 105v-12q0-3 3-3H5q3 0 3 3v12" fill="none" stroke="#ba662f" stroke-width="4" stroke-linecap="round"/>
+              <circle cy="89" r="3" fill="#ba662f"/>
+            </g>
+          </g>
+          <circle cx="320" cy="113" r="7" fill="#f9e7a7" stroke="#8c6230" stroke-width="2.5"/>
+          <g id="balance-left-pan">
+            <path d="M105 113v37m0 0l-48 59m48-59 48 59" fill="none" stroke="#537897" stroke-width="2"/>
+            <circle cx="105" cy="113" r="4" fill="#4a6989"/>
+            <ellipse cx="105" cy="209" rx="55" ry="9" fill="#edf8fc" stroke="#537897" stroke-width="2"/>
+            <use data-balance-sample href="#sample-metal-slug" transform="translate(105 210)"/>
+            <path d="M50 209q55 16 110 0l-9 10H59z" fill="#8aa9ba" stroke="#537897" stroke-width="1.4"/>
+          </g>
+          <g id="balance-right-pan">
+            <path d="M535 113v37m0 0l-48 59m48-59 48 59" fill="none" stroke="#537897" stroke-width="2"/>
+            <circle cx="535" cy="113" r="4" fill="#4a6989"/>
+            <ellipse cx="535" cy="209" rx="55" ry="9" fill="#edf8fc" stroke="#537897" stroke-width="2"/>
+            <g id="balance-pan-weights"></g>
+            <path d="M480 209q55 16 110 0l-9 10h-92z" fill="#8aa9ba" stroke="#537897" stroke-width="1.4"/>
+          </g>
+        </svg>
+      </div>
+      <figcaption class="balance-pan-labels">
+        <span><strong data-bn="বাঁ পাল্লা" data-en="Left pan">বাঁ পাল্লা</strong> · <span id="balance-left-label"></span></span>
+        <span><strong data-bn="ডান পাল্লা" data-en="Right pan">ডান পাল্লা</strong> · <span data-bn="বাটখারা" data-en="Weights">বাটখারা</span></span>
+      </figcaption>
+    </figure>
+    <div class="sc-actions balance-actions">
+      <button type="button" id="balance-beam-toggle" aria-pressed="false">বিম ছাড়ো</button>
+      <button type="button" class="balance-secondary" id="balance-mechanical-reset" data-bn="নিক্তি রিসেট" data-en="Reset balance">নিক্তি রিসেট</button>
+    </div>
+    <p id="balance-mechanical-status" class="balance-result" role="status"></p>
+    <fieldset class="balance-fieldset" id="balance-adjustments">
+      <legend data-bn="বাটখারা ও রাইডার" data-en="Weights and rider">বাটখারা ও রাইডার</legend>
+      <div class="balance-controls">
+        <div>
+          <h3 data-bn="বাটখারার বাক্স" data-en="Weight box">বাটখারার বাক্স</h3>
+          <div id="balance-weight-box" class="balance-weight-box"></div>
+        </div>
+        <div class="balance-rider-panel">
+          <h3 data-bn="রাইডার" data-en="Rider">রাইডার</h3>
+          <label for="balance-rider-mass" data-bn="রাইডারের ভর" data-en="Rider mass">রাইডারের ভর</label>
+          <select class="sc-select" id="balance-rider-mass"><option value="5">5 mg</option><option value="10">10 mg</option></select>
+          <label for="balance-rider-position" data-bn="বিমের দাগ" data-en="Beam division">বিমের দাগ</label>
+          <div class="balance-rider-controls">
+            <button type="button" class="balance-secondary" id="balance-rider-down" aria-label="এক দাগ বামে">−</button>
+            <input type="range" id="balance-rider-position" min="-50" max="50" step="1" value="0" aria-describedby="balance-rider-mark">
+            <button type="button" class="balance-secondary" id="balance-rider-up" aria-label="এক দাগ ডানে">+</button>
+          </div>
+          <p class="balance-rider-scale"><span>−50</span><output id="balance-rider-mark" for="balance-rider-position">0</output><span>+50</span></p>
+          <p id="balance-rider-constant" class="balance-constant"></p>
+          <p class="balance-constant" data-bn="কেন্দ্র থেকে ডানে সরালে অবদান যোগ হয়, বামে সরালে বিয়োগ হয়।" data-en="Moving right of centre adds to the reading. Moving left subtracts.">কেন্দ্র থেকে ডানে সরালে অবদান যোগ হয়, বামে সরালে বিয়োগ হয়।</p>
+        </div>
+      </div>
+    </fieldset>
+    <a class="balance-back" href="#balance-figure" data-bn="বিম ও সাম্য পরীক্ষা ↑" data-en="Return to the beam ↑">বিম ও সাম্য পরীক্ষা ↑</a>
+    <dl class="balance-totals">
+      <div><dt data-bn="বাটখারার ভর" data-en="Total weights">বাটখারার ভর</dt><dd id="balance-weights-total"></dd></div>
+      <div><dt data-bn="রাইডারের অবদান" data-en="Rider contribution">রাইডারের অবদান</dt><dd id="balance-rider-total"></dd></div>
+      <div><dt data-bn="বস্তুর মাপা ভর" data-en="Measured sample mass">বস্তুর মাপা ভর</dt><dd id="balance-measured"></dd></div>
+    </dl>
+  </section>
+  <section class="sc-card" id="digital">
+    <h2 data-bn="ডিজিটাল নিক্তি · ২ ও ৪ ডিজিট" data-en="Digital balances · 2 and 4 decimal places">ডিজিটাল নিক্তি · ২ ও ৪ ডিজিট</h2>
+    <p data-bn="পাল্লায় বস্তু রাখো এবং একই নমুনার দুটি পাঠ তুলনা করো। পাত্র ব্যবহার করলে বস্তু রাখার আগে খালি পাত্রের ভর TARE দিয়ে বাদ দিতে পারো।" data-en="Place the object on the pans and compare the two readings. If you use a container, tare the empty container before adding the object.">পাল্লায় বস্তু রাখো এবং একই নমুনার দুটি পাঠ তুলনা করো। পাত্র ব্যবহার করলে বস্তু রাখার আগে খালি পাত্রের ভর TARE দিয়ে বাদ দিতে পারো।</p>
+    <div class="balance-digital-grid">
+      <figure class="balance-digital">
+        <figcaption>
+          <strong data-bn="২ ডিজিট · প্রিসিশন নিক্তি" data-en="2-place precision balance">২ ডিজিট · প্রিসিশন নিক্তি</strong>
+          <span data-bn="ক্ষুদ্রতম পাঠের ধাপ 0.01 g" data-en="Readability 0.01 g">ক্ষুদ্রতম পাঠের ধাপ 0.01 g</span>
+        </figcaption>
+        <div class="balance-digital-case">
+          <svg viewBox="0 0 300 142" aria-hidden="true">
+            <path d="M81 94h138l28 21v17H53v-17z" fill="#9dbed2" stroke="#557994" stroke-width="2"/>
+            <path d="M119 87h62v15h-62z" fill="#7895af" stroke="#476986" stroke-width="2"/>
+            <ellipse cx="150" cy="86" rx="79" ry="13" fill="#e6f2f8" stroke="#557994" stroke-width="2"/>
+            <use class="balance-digital-sample" data-balance-sample href="#sample-metal-slug" x="150" y="86" visibility="hidden"/>
+            <use class="balance-digital-boat" href="#balance-boat" x="150" y="86" visibility="hidden"/>
+          </svg>
+          <div class="balance-readout"><output id="balance-digital-2" aria-label="2 decimal places">0.00</output><span>g</span></div>
+        </div>
+      </figure>
+      <figure class="balance-digital">
+        <figcaption>
+          <strong data-bn="৪ ডিজিট · অ্যানালিটিক্যাল নিক্তি" data-en="4-place analytical balance">৪ ডিজিট · অ্যানালিটিক্যাল নিক্তি</strong>
+          <span data-bn="ক্ষুদ্রতম পাঠের ধাপ 0.0001 g" data-en="Readability 0.0001 g">ক্ষুদ্রতম পাঠের ধাপ 0.0001 g</span>
+        </figcaption>
+        <div class="balance-digital-case">
+          <svg viewBox="0 0 300 142" aria-hidden="true">
+            <rect x="72" y="10" width="156" height="94" rx="6" fill="#e0f1f8" stroke="#7ba7be" stroke-width="2"/>
+            <path d="M81 94h138l28 21v17H53v-17z" fill="#9dbed2" stroke="#557994" stroke-width="2"/>
+            <ellipse cx="150" cy="86" rx="58" ry="10" fill="#eef7fa" stroke="#557994" stroke-width="2"/>
+            <use class="balance-digital-sample" data-balance-sample href="#sample-metal-slug" x="150" y="86" visibility="hidden"/>
+            <use class="balance-digital-boat" href="#balance-boat" x="150" y="86" visibility="hidden"/>
+            <path d="M84 97V21h132v76m-66-76v23m0 44v9m-57-65h24m61 0h22" fill="none" stroke="#9bbfd2" stroke-width="2"/>
+            <path d="M102 51v16m96-16v16" stroke="#7499b3" stroke-width="3" stroke-linecap="round"/>
+          </svg>
+          <div class="balance-readout"><output id="balance-digital-4" aria-label="4 decimal places">0.0000</output><span>g</span></div>
+        </div>
+      </figure>
+    </div>
+    <div class="sc-actions balance-actions">
+      <button type="button" id="balance-place-sample">বস্তু রাখো</button>
+      <button type="button" class="balance-secondary" id="balance-place-boat">ওজন-পাত্র রাখো</button>
+      <button type="button" class="balance-secondary" id="balance-tare">TARE</button>
+      <button type="button" class="balance-secondary" id="balance-digital-reset" data-bn="ডিজিটাল নিক্তি রিসেট" data-en="Reset digital balances">ডিজিটাল নিক্তি রিসেট</button>
+    </div>
+    <p id="balance-digital-status" class="balance-result" role="status"></p>
+  </section>
+  <section class="sc-card" id="solutions">
+    <h2 data-bn="দ্রবণ তৈরি ও মোলার ঘনমাত্রা" data-en="Prepare a solution and identify its molarity">দ্রবণ তৈরি ও মোলার ঘনমাত্রা</h2>
+    <p data-bn="যৌগ, চূড়ান্ত আয়তন ও নমুনার ভর বেছে নাও। দ্রবণ তৈরি করে ঘনমাত্রার নাম নির্ণয় করো।" data-en="Choose a compound, final volume and sample mass. Prepare the solution and identify its concentration.">যৌগ, চূড়ান্ত আয়তন ও নমুনার ভর বেছে নাও। দ্রবণ তৈরি করে ঘনমাত্রার নাম নির্ণয় করো।</p>
+    <div class="solution-selects sc-form">
+      <label><span data-bn="যৌগ" data-en="Compound">যৌগ</span>
+        <select id="solution-compound">
+          <option value="nacl">NaCl</option><option value="kcl">KCl</option><option value="carbonate">Na₂CO₃</option>
+        </select>
+      </label>
+      <label><span data-bn="দ্রবণের চূড়ান্ত আয়তন" data-en="Final solution volume">দ্রবণের চূড়ান্ত আয়তন</span>
+        <select id="solution-volume">
+          <option value="100">100 mL</option><option value="250">250 mL</option><option value="500">500 mL</option><option value="1000">1000 mL</option>
+        </select>
+      </label>
+      <label><span data-bn="নমুনার ভর" data-en="Sample mass">নমুনার ভর</span><select id="solution-mass"></select></label>
+    </div>
+    <p id="solution-molar-mass"></p>
+    <div class="solution-bench">
+      <div class="balance-diagram">
+        <svg id="solution-scene" viewBox="0 0 360 190" class="solution-scene" aria-hidden="true" data-step="0">
+          <path d="M20 164h320" stroke="#9bb7c9" stroke-width="2" stroke-linecap="round"/>
+          <g>
+            <path d="M36 54h10v95q0 9 9 9h64q9 0 9-9V54h10" fill="#f6fbfe" stroke="#547892" stroke-width="2.5"/>
+            <path id="solution-beaker-water" d="M49 113q40-8 76 0v36q0 6-6 6H55q-6 0-6-6z" fill="#b9ddf0"/>
+            <path d="M50 73h15m-15 15h9m-9 15h15m-15 15h9m-9 15h15" fill="none" stroke="#7197ad" stroke-width="1.5"/>
+            <path class="solution-swirl" d="M60 131q27-17 54-5m-52 12q24-14 50-6" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+          </g>
+          <path class="solution-transfer" d="M152 94h43m-11-10 11 10-11 10" fill="none" stroke="#287697" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          <g>
+            <path d="M238 27h28m-25 1v58q0 9-10 18l-16 18q-12 14-4 25 6 11 22 11h39q16 0 22-11 8-11-4-25l-16-18q-10-9-10-18V28" fill="#f6fbfe" stroke="#547892" stroke-width="2.5"/>
+            <path id="solution-flask-water" d="M244 52q9 6 17 0v34q0 11 11 21l16 18q10 13 3 21-5 9-19 9h-39q-14 0-19-9-7-8 3-21l16-18q11-10 11-21z" fill="#a8dceb"/>
+            <path d="M237 55h31m7 0h22" fill="none" stroke="#356984" stroke-width="2"/>
+            <text id="solution-flask-label" x="275" y="48" font-size="13" fill="#26475d" font-family="sans-serif">100 mL</text>
+          </g>
+        </svg>
+        <div class="solution-figure-labels">
+          <span data-bn="বিকার" data-en="Beaker">বিকার</span>
+          <span data-bn="আয়তনিক ফ্লাস্ক" data-en="Volumetric flask">আয়তনিক ফ্লাস্ক</span>
+        </div>
+      </div>
+      <div>
+        <div class="sc-actions balance-actions">
+          <button type="button" id="solution-dissolve" data-bn="১. পানিতে দ্রবীভূত করো" data-en="1. Dissolve in water">১. পানিতে দ্রবীভূত করো</button>
+          <button type="button" id="solution-fill" data-bn="২. ফ্লাস্কে নিয়ে দাগ পর্যন্ত পূরণ" data-en="2. Transfer and fill to the mark">২. ফ্লাস্কে নিয়ে দাগ পর্যন্ত পূরণ</button>
+          <button type="button" class="balance-secondary" id="solution-reset" data-bn="আবার শুরু" data-en="Start again">আবার শুরু</button>
+        </div>
+        <p id="solution-step-status" class="balance-result" role="status"></p>
+      </div>
+    </div>
+    <form id="solution-answer">
+      <fieldset class="balance-fieldset sc-form" id="solution-answer-controls" disabled>
+        <legend data-bn="কোন ঘনমাত্রার দ্রবণ তৈরি হলো?" data-en="Which concentration did you prepare?">কোন ঘনমাত্রার দ্রবণ তৈরি হলো?</legend>
+        <label for="solution-type" data-bn="ঘনমাত্রার ধরন" data-en="Concentration type">ঘনমাত্রার ধরন</label>
+        <select id="solution-type" required></select>
+        <button type="submit" data-bn="উত্তর ও হিসাব দেখো" data-en="Check answer and calculation">উত্তর ও হিসাব দেখো</button>
+      </fieldset>
+    </form>
+    <div id="solution-result" class="balance-result" role="status" hidden>
+      <strong id="solution-verdict"></strong>
+      <p id="solution-calculation"></p>
+    </div>
+  </section>
+  <section class="sc-card balance-references">
+    <h2 data-bn="যন্ত্রের তথ্যসূত্র" data-en="Instrument references">যন্ত্রের তথ্যসূত্র</h2>
+    <ul>
+      <li><a href="https://teachers.gov.bd/shared/contents/2020/October/11/blogs/file_562433_1602426921.pdf" data-bn="শিক্ষক বাতায়ন · রাসায়নিক ও ডিজিটাল নিক্তি" data-en="Teachers’ Portal · Chemical and digital balances">শিক্ষক বাতায়ন · রাসায়নিক ও ডিজিটাল নিক্তি</a></li>
+      <li><a href="https://www.sartorius.com/en/products/weighing/laboratory-balances/analytical-lab-balance">Sartorius · Analytical balances</a></li>
+      <li><a href="https://openstax.org/books/chemistry-2e/pages/3-3-molarity">OpenStax · Molarity</a></li>
+    </ul>
+  </section>
+</main>
+<script type="module" src="lab-balances.js"></script>
+</body>
+</html>

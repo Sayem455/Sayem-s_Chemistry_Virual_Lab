@@ -22,6 +22,10 @@ export const types = {
 };
 export const starter = [
   ...activities.map(a=>[a.chapter,"experiment",a.name,a.nameEn,"experiments.html#activity-"+a.chapter]),
+  ["1-1","experiment","ল্যাব নিরাপত্তা · ভার্চুয়াল অনুশীলন","Lab safety · virtual practice","lab-safety.html"],
+  ["1-1","experiment","রাসায়নিক ও ডিজিটাল নিক্তি","Chemical and digital balances","lab-balances.html"],
+  ["1-1","experiment","দ্রবণ তৈরি ও ঘনমাত্রা","Solution preparation and molarity","lab-balances.html#solutions"],
+  ["1-1","experiment","ল্যাব নিরাপত্তা ও যন্ত্রপাতি গাইড","Lab safety and equipment guide","lab-guide.html"],
   ["1-2","video","শিখার বর্ণ · ভিডিও","Flame colours · video","materials/Sayems_Chemistry_Flame_Colours.mp4"],
   ["1-2","slides","গুণগত রসায়ন · ক্লাস স্লাইড টেমপ্লেট","Qualitative chemistry · class slide template","materials/Sayems_Chemistry_Qualitative_Chemistry_Template.pptx"],
   ["1-2","experiment","শিখা পরীক্ষা","Flame test","experiments.html#flame"],

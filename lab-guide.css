@@ -1,0 +1,62 @@
+.guide-definitions { position: absolute; }
+.guide-lab .guide-kicker { color: #234fa5; font-weight: 700; }
+.guide-lab section[id] { scroll-margin-top: 88px; }
+.guide-jump { display: flex; flex-wrap: wrap; gap: 10px 18px; }
+.guide-jump a { color: #234fa5; }
+.guide-picks {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 122px), 1fr));
+  gap: 8px;
+  margin-bottom: 12px;
+}
+.guide-picks button.guide-pick {
+  display: grid;
+  justify-items: center;
+  align-content: center;
+  min-height: 72px;
+  gap: 4px;
+  padding: 6px;
+  line-height: 1.25;
+  text-align: center;
+  border-color: #d5e1f1;
+  color: #203857;
+  background: #f5f9ff;
+}
+.guide-picks .guide-pick[aria-pressed="true"] { color: #193a77; background: #e4efff; border-color: #356bc0; }
+.guide-pick .guide-icon { width: 46px; height: 46px; }
+.guide-icon { color: #356184; }
+.guide-pick strong { font-size: 1rem; }
+.guide-pick small { font-size: .83rem; }
+.guide-symbols .guide-pick .safety-sign { width: 40px; }
+.guide-detail {
+  padding: 12px;
+  border: 1px solid #d5e1f1;
+  border-radius: 12px;
+  background: #f3f7ff;
+  overflow-wrap: anywhere;
+}
+.guide-detail h3 { margin-bottom: 6px; }
+.guide-detail p { margin: 6px 0 0; }
+.guide-detail ul { padding-inline-start: 1.25em; margin: 6px 0 0; }
+.guide-detail li + li { margin-top: 5px; }
+.guide-tool-body { display: grid; grid-template-columns: auto 1fr; gap: 12px; align-items: start; }
+.guide-tool-body .guide-icon, .guide-tool-body .safety-sign { width: 64px; height: 64px; max-width: none; }
+.guide-pictograms { display: flex; gap: 8px; flex-wrap: wrap; margin: 10px 0; }
+.guide-pictograms figure { margin: 0; text-align: center; width: 79px; }
+.guide-pictograms .safety-sign { width: 54px; margin: 0 auto; }
+.guide-pictograms figcaption { font-size: .79rem; color: #40536e; }
+.guide-signal {
+  display: inline-block;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 5px;
+  background: #fbe5e3;
+  color: #8f302c;
+}
+.guide-signal[data-signal="warning"] { background: #fff1d4; color: #754819; }
+.guide-reference-link { display: inline-block; margin-top: 8px; color: #234fa5; }
+.guide-habit { padding: 9px 10px; border: 1px solid #d5e1f1; border-radius: 8px; background: #f5f9ff; }
+.guide-habit + .guide-habit { margin-top: 7px; }
+.guide-habit summary { min-height: 30px; font-weight: 700; color: #79391a; cursor: pointer; }
+.guide-habit p { margin: 6px 0; }
+.guide-references { font-size: .9rem; }

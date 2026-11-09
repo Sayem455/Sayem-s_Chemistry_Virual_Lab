@@ -93,3 +93,58 @@ canvas.molecule-view:active:not([data-mode="2d"]) { cursor: grabbing; }
   .bench { grid-template-columns: 1fr; }
   .model-facts { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
 }
+
+.safety-lab .safety-kicker { color: #234fa5; font-weight: 700; }
+.safety-lab .safety-progress { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 14px; }
+.safety-progress p { margin: 0 0 5px; font-weight: 700; }
+.safety-progress progress { width: 100%; height: 14px; accent-color: #137766; }
+.safety-jump { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 8px 15px; }
+.safety-jump a { color: #234fa5; }
+.safety-lab button { min-height: 44px; }
+.safety-lab button:disabled { opacity: .55; cursor: default; }
+.safety-options {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 190px), 1fr));
+  gap: 8px;
+  border: 1px solid #d5e1f1;
+  border-radius: 12px;
+  padding: 10px;
+  margin: 0 0 12px;
+}
+.safety-options label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 6px 10px;
+  background: #f3f7ff;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.safety-options input { width: 18px; height: 18px; flex: 0 0 18px; accent-color: #234fa5; }
+.safety-feedback { border-inline-start: 4px solid; padding: 9px 12px; border-radius: 6px; }
+.safety-feedback[data-result="correct"] { color: #0a5949; background: #e9f8f3; }
+.safety-feedback[data-result="retry"] { color: #79381a; background: #fff4e8; }
+.safety-sign {
+  display: block;
+  width: 112px;
+  max-width: 80%;
+  aspect-ratio: 1;
+  background: white url("lab-safety-signs.webp") 0 0 / 900% 100% no-repeat;
+}
+.safety-sign[data-sign="corrosion"] { background-position-x: 12.5%; }
+.safety-sign[data-sign="skull"] { background-position-x: 25%; }
+.safety-sign[data-sign="exclamation"] { background-position-x: 37.5%; }
+.safety-sign[data-sign="environment"] { background-position-x: 50%; }
+.safety-sign[data-sign="oxidizer"] { background-position-x: 62.5%; }
+.safety-sign[data-sign="explosive"] { background-position-x: 75%; }
+.safety-sign[data-sign="gas"] { background-position-x: 87.5%; }
+.safety-sign[data-sign="health"] { background-position-x: 100%; }
+.safety-pour, .safety-heat { visibility: hidden; }
+.safety-dilution-scene[data-state="ready"] .safety-pour,
+.safety-dilution-scene[data-state="ready"] .safety-heat { visibility: visible; }
+@media (prefers-reduced-motion: no-preference) {
+  .safety-dilution-scene[data-state="ready"] .safety-pour { animation: safety-pour .55s linear 3; }
+}
+@keyframes safety-pour { to { stroke-dashoffset: -12; } }
+.safety-references { font-size: .9rem; }

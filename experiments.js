@@ -189,6 +189,12 @@ canvas.onpointermove = event => {
 canvas.onlostpointercapture = () => { drag = undefined; };
 
 const chapterDemos = {
+  "1-1": [
+    ["lab-safety.html", "ল্যাব নিরাপত্তা · ভার্চুয়াল অনুশীলন", "Lab safety · virtual practice"],
+    ["lab-balances.html", "রাসায়নিক ও ডিজিটাল নিক্তি", "Chemical and digital balances"],
+    ["lab-balances.html#solutions", "দ্রবণ তৈরি ও ঘনমাত্রা", "Solution preparation and molarity"],
+    ["lab-guide.html", "ল্যাব নিরাপত্তা ও যন্ত্রপাতি গাইড", "Lab safety and equipment guide"],
+  ],
   "1-2": [["#flame", "শিখা পরীক্ষা", "Flame test"], ["#chloride", "ক্লোরাইড শনাক্তকরণ", "Chloride test"]],
   "1-3": [["#water", "3D অণুর মডেল", "3D molecular models"], ["lab.html#periodic", "পর্যায় সারণি", "Periodic table"]],
   "2-1": [["#limewater", "চুনের পানিতে CO₂ শনাক্তকরণ", "Detect CO₂ with limewater"]],

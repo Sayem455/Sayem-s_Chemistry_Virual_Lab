@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="bn">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Lab safety | Sayem’s Chemistry</title>
+  <link rel="stylesheet" href="portal.css">
+  <link rel="stylesheet" href="experiments.css">
+</head>
+<body class="sc-page">
+<header class="sc-top">
+  <div class="sc-shell sc-nav">
+    <a class="sc-brand" href="index.html"><img src="sayems-chemistry-logo.png" alt="">Sayem’s Chemistry</a>
+    <div class="sc-actions">
+      <a href="experiments.html#chapters" data-bn="অধ্যায়ভিত্তিক ল্যাব" data-en="Chapter labs">অধ্যায়ভিত্তিক ল্যাব</a>
+      <button type="button" id="language">EN</button>
+    </div>
+  </div>
+</header>
+<main class="sc-shell safety-lab">
+  <div class="sc-intro">
+    <p class="safety-kicker" data-bn="HSC রসায়ন · ১ম পত্র · অধ্যায় ১" data-en="HSC Chemistry · Paper 1 · Chapter 1">HSC রসায়ন · ১ম পত্র · অধ্যায় ১</p>
+    <h1 data-bn="ল্যাবরেটরির নিরাপদ ব্যবহার" data-en="Safe use of the laboratory">ল্যাবরেটরির নিরাপদ ব্যবহার</h1>
+    <p data-bn="তিনটি ভার্চুয়াল অনুশীলনে পরীক্ষা শুরুর আগের সিদ্ধান্তগুলো নাও।" data-en="Practise the decisions you make before an experiment in three virtual activities.">তিনটি ভার্চুয়াল অনুশীলনে পরীক্ষা শুরুর আগের সিদ্ধান্তগুলো নাও।</p>
+  </div>
+  <section class="sc-card safety-progress" aria-label="Progress">
+    <div>
+      <p id="safety-progress-text" role="status"></p>
+      <progress id="safety-progress" max="3" value="0" aria-labelledby="safety-progress-text"></progress>
+    </div>
+    <button type="button" id="safety-reset" data-bn="আবার শুরু" data-en="Start again">আবার শুরু</button>
+    <nav class="safety-jump">
+      <a href="#ppe" data-bn="১. সুরক্ষা সরঞ্জাম" data-en="1. Protective equipment">১. সুরক্ষা সরঞ্জাম</a>
+      <a href="#hazards" data-bn="২. বিপদচিহ্ন" data-en="2. Hazard pictograms">২. বিপদচিহ্ন</a>
+      <a href="#dilution" data-bn="৩. অ্যাসিড পাতলাকরণ" data-en="3. Acid dilution">৩. অ্যাসিড পাতলাকরণ</a>
+      <a href="lab-balances.html" data-bn="নিক্তিতে ভর মাপো ↗" data-en="Weigh with lab balances ↗">নিক্তিতে ভর মাপো ↗</a>
+      <a href="lab-balances.html#solutions" data-bn="দ্রবণ তৈরি ও ঘনমাত্রা ↗" data-en="Solution preparation and molarity ↗">দ্রবণ তৈরি ও ঘনমাত্রা ↗</a>
+      <a href="lab-guide.html" data-bn="যৌগ ও যন্ত্রপাতির গাইড ↗" data-en="Chemical and equipment guide ↗">যৌগ ও যন্ত্রপাতির গাইড ↗</a>
+    </nav>
+  </section>
+  <section class="sc-card" id="ppe">
+    <h2 data-bn="১. সুরক্ষা সরঞ্জাম বাছাই" data-en="1. Select protective equipment">১. সুরক্ষা সরঞ্জাম বাছাই</h2>
+    <p data-bn="দ্রবণ ছিটকে পড়ার ঝুঁকি আছে। শিক্ষক জানিয়েছেন, এই কাজে রাসায়নিকের উপযোগী গ্লাভসও লাগবে। সব উপযুক্ত সরঞ্জাম বেছে নাও।" data-en="The solution could splash. Your teacher says this task also requires chemically suitable gloves. Choose all the appropriate equipment.">দ্রবণ ছিটকে পড়ার ঝুঁকি আছে। শিক্ষক জানিয়েছেন, এই কাজে রাসায়নিকের উপযোগী গ্লাভসও লাগবে। সব উপযুক্ত সরঞ্জাম বেছে নাও।</p>
+    <form id="ppe-form">
+      <fieldset class="safety-options">
+        <legend data-bn="কোনগুলো পরবে?" data-en="What will you wear?">কোনগুলো পরবে?</legend>
+        <label><input type="checkbox" name="gear" value="goggles"><span data-bn="রাসায়নিক ছিটা-রোধী গগলস" data-en="Chemical splash goggles">রাসায়নিক ছিটা-রোধী গগলস</span></label>
+        <label><input type="checkbox" name="gear" value="glasses"><span data-bn="সাধারণ চশমা" data-en="Ordinary glasses">সাধারণ চশমা</span></label>
+        <label><input type="checkbox" name="gear" value="coat"><span data-bn="ল্যাব কোট" data-en="Lab coat">ল্যাব কোট</span></label>
+        <label><input type="checkbox" name="gear" value="sandals"><span data-bn="খোলা স্যান্ডেল" data-en="Open sandals">খোলা স্যান্ডেল</span></label>
+        <label><input type="checkbox" name="gear" value="gloves"><span data-bn="রাসায়নিকের উপযোগী গ্লাভস" data-en="Chemically suitable gloves">রাসায়নিকের উপযোগী গ্লাভস</span></label>
+        <label><input type="checkbox" name="gear" value="shoes"><span data-bn="পা ঢাকা জুতা" data-en="Closed shoes">পা ঢাকা জুতা</span></label>
+      </fieldset>
+      <button type="submit" data-bn="বাছাই যাচাই করো" data-en="Check selection">বাছাই যাচাই করো</button>
+    </form>
+    <p class="safety-feedback" id="ppe-result" role="status" hidden></p>
+  </section>
+  <section class="sc-card" id="hazards">
+    <h2 data-bn="২. বোতলের বিপদচিহ্ন চেনো" data-en="2. Read the bottle’s hazard pictogram">২. বোতলের বিপদচিহ্ন চেনো</h2>
+    <div class="bench">
+      <div class="tube-scene safety-sign-panel">
+        <div id="hazard-sign" class="safety-sign" role="img" data-sign="flame" aria-label="লাল ডায়মন্ডে কালো শিখা"></div>
+      </div>
+      <div>
+        <p id="hazard-position"></p>
+        <p data-bn="এই চিহ্নটি কোন বিপদ বোঝাতে ব্যবহৃত হয়?" data-en="Which hazard can this pictogram indicate?">এই চিহ্নটি কোন বিপদ বোঝাতে ব্যবহৃত হয়?</p>
+        <div class="sc-actions bench-controls">
+          <button type="button" data-hazard="corrosion" data-bn="ক্ষয়কারী" data-en="Corrosive">ক্ষয়কারী</button>
+          <button type="button" data-hazard="flame" data-bn="দাহ্য" data-en="Flammable">দাহ্য</button>
+          <button type="button" data-hazard="skull" data-bn="তীব্র বিষাক্ততা" data-en="Acute toxicity">তীব্র বিষাক্ততা</button>
+        </div>
+        <p class="safety-feedback" id="hazard-result" role="status" hidden></p>
+        <button type="button" id="hazard-next" data-bn="পরের চিহ্ন" data-en="Next pictogram" hidden>পরের চিহ্ন</button>
+      </div>
+    </div>
+  </section>
+  <section class="sc-card" id="dilution">
+    <h2 data-bn="৩. অ্যাসিড পাতলা করার ক্রম" data-en="3. Choose the order for diluting acid">৩. অ্যাসিড পাতলা করার ক্রম</h2>
+    <p data-bn="ভার্চুয়াল দৃশ্যে কোন তরলটি অন্যটির মধ্যে ধীরে যোগ করবে?" data-en="In the virtual scene, which liquid should be added slowly to the other?">ভার্চুয়াল দৃশ্যে কোন তরলটি অন্যটির মধ্যে ধীরে যোগ করবে?</p>
+    <div class="bench">
+      <div class="tube-scene">
+        <svg id="dilution-scene" class="safety-dilution-scene" width="172" height="180" viewBox="0 0 172 180" aria-hidden="true">
+          <g fill="#ffe6b1" stroke="#8d612c" stroke-width="2">
+            <path d="M67 25V12h38v13l9 8v25H58V33z"/>
+            <path d="M79 58v7h14v-7"/>
+          </g>
+          <path d="M42 86v61q0 12 12 12h64q12 0 12-12V86h8" fill="#f7fbff" stroke="#5576a2" stroke-width="2.5"/>
+          <path d="M44 121q41-8 84 0v25q0 11-11 11H55q-11 0-11-11z" fill="#a9d9f3"/>
+          <path d="M46 98h13m-13 13h8m-8 13h13m-13 13h8" fill="none" stroke="#5576a2" stroke-width="2"/>
+          <path class="safety-pour" d="M86 69v47" fill="none" stroke="#ad5b25" stroke-width="4" stroke-linecap="round" stroke-dasharray="4 8"/>
+          <path class="safety-heat" d="M109 111q-5-4 0-8t0-8m11 16q-5-4 0-8t0-8" fill="none" stroke="#ad5b25" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div>
+        <div class="sc-actions bench-controls">
+          <button type="button" data-dilution="acid" data-bn="পানিতে অ্যাসিড যোগ" data-en="Add acid to water">পানিতে অ্যাসিড যোগ</button>
+          <button type="button" data-dilution="water" data-bn="অ্যাসিডে পানি যোগ" data-en="Add water to acid">অ্যাসিডে পানি যোগ</button>
+        </div>
+        <p class="safety-feedback" id="dilution-result" role="status" hidden></p>
+      </div>
+    </div>
+  </section>
+  <section class="sc-card safety-references">
+    <p data-bn="বাস্তব ল্যাবে শিক্ষকের তত্ত্বাবধান ও নির্ধারিত নিরাপত্তা নির্দেশনা অনুসরণ করো।" data-en="In a real laboratory, work under your teacher’s supervision and follow the approved safety instructions.">বাস্তব ল্যাবে শিক্ষকের তত্ত্বাবধান ও নির্ধারিত নিরাপত্তা নির্দেশনা অনুসরণ করো।</p>
+    <ul>
+      <li><a href="https://www.acs.org/education/policies/middle-and-high-school-chemistry/classroom-and-lab-facilities/safety-equipment.html">ACS · Lab &amp; Safety Equipment</a></li>
+      <li><a href="https://www.osha.gov/hazcom/pictograms">OSHA · Hazard Pictograms</a></li>
+      <li><a href="https://ehs.cornell.edu/research-safety/chemical-safety/laboratory-safety-manual/chapter-8-chemical-hazards/89-corrosives">Cornell EHS · Corrosives</a></li>
+    </ul>
+  </section>
+</main>
+<script type="module" src="lab-safety.js"></script>
+</body>
+</html>
