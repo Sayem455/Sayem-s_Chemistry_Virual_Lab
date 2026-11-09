@@ -1,14 +1,67 @@
-<!doctype html><html lang="bn"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Interactive experiments | Sayem’s Chemistry</title><link rel="stylesheet" href="portal.css">
+<!doctype html><html lang="bn"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Interactive experiments | Sayem’s Chemistry</title><link rel="stylesheet" href="portal.css"><link rel="stylesheet" href="experiments.css">
 <body class="sc-page"><header class="sc-top"><div class="sc-shell sc-nav"><a class="sc-brand" href="index.html"><img src="sayems-chemistry-logo.png" alt="">Sayem’s Chemistry</a><div class="sc-actions"><a href="portal.html#learn">Student portal</a><a href="lab.html">Virtual Lab</a><button id="language">EN</button></div></div></header>
 <div class="sc-shell"><main><div class="sc-intro"><h1 data-bn="ইন্টারঅ্যাকটিভ ল্যাব" data-en="Interactive lab">ইন্টারঅ্যাকটিভ ল্যাব</h1></div>
+<section class="sc-card" id="chapters">
+  <h2 data-bn="HSC রসায়ন · অধ্যায়ভিত্তিক ল্যাব" data-en="HSC Chemistry · Chapter lab index">HSC রসায়ন · অধ্যায়ভিত্তিক ল্যাব</h2>
+  <p data-bn="একাদশ–দ্বাদশ শ্রেণি · পরীক্ষা, 3D মডেল ও ধারণা অনুশীলন" data-en="Classes 11–12 · Experiments, 3D models and concept practice">একাদশ–দ্বাদশ শ্রেণি · পরীক্ষা, 3D মডেল ও ধারণা অনুশীলন</p>
+  <div id="chapter-index"></div>
+</section>
 <section class="sc-card" id="flame"><h2 data-bn="শিখা পরীক্ষা" data-en="Flame test">শিখা পরীক্ষা</h2>
 <p data-bn="আয়ন বেছে শিখার বর্ণ দেখো।" data-en="Choose an ion and observe the flame colour.">আয়ন বেছে শিখার বর্ণ দেখো।</p>
 <div class="sc-actions"><button data-ion="Na">Na⁺</button><button data-ion="Ca">Ca²⁺</button><button data-ion="Ba">Ba²⁺</button></div>
 <svg class="sc-model" width="260" height="180" viewBox="0 0 260 180" aria-hidden="true"><path id="flame-shape" d="M130 26 C 143 58 116 62 142 81 Q 155 78 156 63 C 190 126 146 145 130 142 C 90 140 87 105 104 83 C 104 104 132 88 130 26Z"/><rect x="119" y="140" width="22" height="25" rx="4" fill="#334155"/><rect x="92" y="164" width="76" height="8" rx="4" fill="#334155"/></svg>
 <p id="colour" role="status"></p></section>
-<section class="sc-card" id="water"><h2 data-bn="পানির অণু · 2D ও 3D" data-en="Water molecule · 2D and 3D">পানির অণু · 2D ও 3D</h2>
-<p data-bn="H–O–H বন্ধন কোণ প্রায় ১০৪.৫°। স্লাইডার দিয়ে 3D মডেল ঘোরাও।" data-en="The H–O–H bond angle is about 104.5°. Use the sliders to rotate the 3D model.">H–O–H বন্ধন কোণ প্রায় ১০৪.৫°। স্লাইডার দিয়ে 3D মডেল ঘোরাও।</p>
-<div class="sc-actions"><button data-model="2d">2D</button><button data-model="3d">3D</button></div>
-<div id="rotation" class="sc-form"><label><span data-bn="অনুভূমিক ঘূর্ণন" data-en="Horizontal rotation">অনুভূমিক ঘূর্ণন</span><input type="range" min="-180" max="180" value="25" id="yaw"></label><label><span data-bn="উল্লম্ব ঘূর্ণন" data-en="Vertical rotation">উল্লম্ব ঘূর্ণন</span><input type="range" min="-180" max="180" value="25" id="pitch"></label></div>
-<canvas class="sc-model" width="390" height="260" id="molecule" aria-label="Water molecule · O and two H atoms"></canvas></section><div id="activities"></div></main></div>
+<section class="sc-card" id="chloride">
+  <h2 data-bn="ক্লোরাইড আয়ন শনাক্তকরণ" data-en="Identify chloride ions">ক্লোরাইড আয়ন শনাক্তকরণ</h2>
+  <p data-bn="নমুনায় একে একে বিকারক যোগ করে অধঃক্ষেপের পরিবর্তন দেখো।" data-en="Add each reagent in order and observe how the precipitate changes.">নমুনায় একে একে বিকারক যোগ করে অধঃক্ষেপের পরিবর্তন দেখো।</p>
+  <div class="bench">
+    <div class="tube-scene" aria-hidden="true"><div class="test-tube"><div class="tube-liquid" id="chloride-liquid"></div></div></div>
+    <div>
+      <div class="sc-actions bench-controls">
+        <button type="button" data-chloride="1" data-bn="১. পাতলা HNO₃ যোগ" data-en="1. Add dilute HNO₃">১. পাতলা HNO₃ যোগ</button>
+        <button type="button" data-chloride="2" data-bn="২. AgNO₃ যোগ" data-en="2. Add AgNO₃">২. AgNO₃ যোগ</button>
+        <button type="button" data-chloride="3" data-bn="৩. NH₄OH যোগ" data-en="3. Add aqueous ammonia">৩. NH₄OH যোগ</button>
+        <button type="button" data-chloride="0" data-bn="আবার শুরু" data-en="Reset">আবার শুরু</button>
+      </div>
+      <p id="chloride-result" role="status"></p>
+      <p id="chloride-equation" class="reaction-equation"></p>
+    </div>
+  </div>
+</section>
+<section class="sc-card" id="bromine">
+  <h2 data-bn="ব্রোমিন পানির পরীক্ষা" data-en="Bromine water test">ব্রোমিন পানির পরীক্ষা</h2>
+  <p data-bn="ইথেন ও ইথিনে একই বিকারক দিয়ে রঙের পরিবর্তন তুলনা করো।" data-en="Compare ethane and ethene with the same reagent.">ইথেন ও ইথিনে একই বিকারক দিয়ে রঙের পরিবর্তন তুলনা করো।</p>
+  <div class="bench">
+    <div class="tube-scene tube-pair" aria-hidden="true">
+      <div class="test-tube"><div class="tube-liquid" id="ethane-liquid"></div><span>C₂H₆</span></div>
+      <div class="test-tube"><div class="tube-liquid" id="ethene-liquid"></div><span>C₂H₄</span></div>
+    </div>
+    <div>
+      <div class="sc-actions bench-controls">
+        <button type="button" id="add-bromine" data-bn="ব্রোমিন পানি যোগ" data-en="Add bromine water">ব্রোমিন পানি যোগ</button>
+        <button type="button" id="reset-bromine" data-bn="আবার শুরু" data-en="Reset">আবার শুরু</button>
+      </div>
+      <p id="bromine-result" role="status"></p>
+    </div>
+  </div>
+</section>
+<section class="sc-card" id="water">
+  <h2 data-bn="অণুর আকৃতি · 2D ও 3D মডেল" data-en="Molecular shapes · 2D and 3D models">অণুর আকৃতি · 2D ও 3D মডেল</h2>
+  <p data-bn="যৌগ বেছে মডেলটি টেনে ঘোরাও। স্লাইডার দিয়েও দিক বদলাতে পারো।" data-en="Choose a compound and drag to rotate. You can also use the sliders.">যৌগ বেছে মডেলটি টেনে ঘোরাও। স্লাইডার দিয়েও দিক বদলাতে পারো।</p>
+  <div class="model-picker">
+    <label for="compound" data-bn="যৌগ বেছে নাও" data-en="Choose a compound">যৌগ বেছে নাও</label>
+    <select id="compound"></select>
+    <div class="sc-actions"><button type="button" data-model="2d">2D</button><button type="button" data-model="3d">3D</button></div>
+  </div>
+  <canvas class="sc-model molecule-view" width="390" height="260" id="molecule" role="img" aria-label="H₂O"></canvas>
+  <dl class="model-facts">
+    <div><dt data-bn="আকৃতি" data-en="Shape">আকৃতি</dt><dd id="model-shape"></dd></div>
+    <div><dt data-bn="বন্ধন কোণ" data-en="Bond angle">বন্ধন কোণ</dt><dd id="model-angle"></dd></div>
+    <div><dt data-bn="VSEPR / সংকরায়ন" data-en="VSEPR / hybridisation">VSEPR / সংকরায়ন</dt><dd id="model-vsepr"></dd></div>
+  </dl>
+  <div id="rotation" class="sc-form">
+    <label><span data-bn="অনুভূমিক ঘূর্ণন" data-en="Horizontal rotation">অনুভূমিক ঘূর্ণন</span><input type="range" min="-180" max="180" value="25" id="yaw"></label>
+    <label><span data-bn="উল্লম্ব ঘূর্ণন" data-en="Vertical rotation">উল্লম্ব ঘূর্ণন</span><input type="range" min="-180" max="180" value="25" id="pitch"></label>
+  </div>
+</section><div id="activities"></div></main></div>
 <script type="module" src="experiments.js"></script></body></html>

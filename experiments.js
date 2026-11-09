@@ -1,4 +1,6 @@
 import {activities} from "./activities.js";
+import {chapters} from "./content.js";
+import {drawMolecule, models} from "./molecule-models.js";
 import {$,escapeHTML as h,languageButton,tr} from "./shared.js";
 const ions = {
   Na:["#f6ba09","সোনালি হলুদ","Golden yellow"],
@@ -7,45 +9,117 @@ const ions = {
 };
 let ion = "Na";
 let mode = "3d";
-const canvas=$("molecule");
-const ctx=canvas.getContext("2d");
-function render() {
-  const [colour,bn,en]=ions[ion];
-  $("flame-shape").setAttribute("fill",colour);
-  $("colour").textContent=ion+" · "+tr(bn,en);
-  document.querySelectorAll("[data-ion]").forEach(btn=>btn.setAttribute("aria-pressed",btn.dataset.ion===ion));
-  document.querySelectorAll("[data-model]").forEach(btn=>btn.setAttribute("aria-pressed",btn.dataset.model===mode));
-  $("rotation").hidden=mode==="2d";
-  const yaw=mode==="3d"?Number($("yaw").value)*Math.PI/180:0;
-  const pitch=mode==="3d"?Number($("pitch").value)*Math.PI/180:0;
-  function project(x,y,label) {
-    const z=-x*Math.sin(yaw);
-    const depth=y*Math.sin(pitch)+z*Math.cos(pitch);
-    const scale=330/(330-depth);
-    return {x:195+x*Math.cos(yaw)*scale,y:103+(y*Math.cos(pitch)-z*Math.sin(pitch))*scale,depth,label,r:(label==="O"?29:19)*scale};
-  }
-  const angle=52.25*Math.PI/180;
-  const oxygen=project(0,0,"O");
-  const hydrogens=[-1,1].map(side=>project(side*93*Math.sin(angle),93*Math.cos(angle),"H"));
-  ctx.clearRect(0,0,390,260);
-  for(const hydrogen of hydrogens) {
-    ctx.beginPath(); ctx.moveTo(oxygen.x,oxygen.y); ctx.lineTo(hydrogen.x,hydrogen.y);
-    ctx.strokeStyle="#53647d";ctx.lineWidth=mode==="3d"?11:4;ctx.stroke();
-  }
-  for(const atom of [oxygen,...hydrogens].sort((a,b)=>a.depth-b.depth)) {
-    const gradient=ctx.createRadialGradient(atom.x-atom.r/3,atom.y-atom.r/3,2,atom.x,atom.y,atom.r);
-    const base=atom.label==="O"?"#be263f":"#2961b2";
-    gradient.addColorStop(0,atom.label==="O"?"#ff9eac":"#9cc8ff");
-    gradient.addColorStop(1,base);
-    ctx.fillStyle=mode==="3d"?gradient:base;
-    ctx.beginPath();ctx.arc(atom.x,atom.y,atom.r,0,Math.PI*2);ctx.fill();
-    ctx.fillStyle="white";ctx.font="bold 17px system-ui";ctx.textAlign="center";ctx.textBaseline="middle";
-    ctx.fillText(atom.label,atom.x,atom.y);
-  }
+let chlorideStep = 0;
+let bromineAdded = false;
+let drag;
+const canvas = $("molecule");
+const compound = $("compound");
+const yaw = $("yaw");
+const pitch = $("pitch");
+
+compound.replaceChildren(...models.map((model, i) => new Option(model.formula, i)));
+compound.value = String(models.findIndex(model => model.formula === "H₂O"));
+
+const chlorideResults = [
+  ["বর্ণহীন নমুনা। প্রথমে পাতলা নাইট্রিক অ্যাসিড যোগ করো।", "The sample is clear. Start with dilute nitric acid.", ""],
+  ["দ্রবণ অম্লীয় হলো। এখন সিলভার নাইট্রেট যোগ করো।", "The sample is now acidic. Add silver nitrate next.", ""],
+  ["সাদা AgCl অধঃক্ষেপ তৈরি হয়েছে।", "A white AgCl precipitate forms.", "Ag⁺(aq) + Cl⁻(aq) → AgCl(s)"],
+  ["অধঃক্ষেপ দ্রবীভূত হয়েছে। বর্ণহীন ডাইঅ্যামিন সিলভার(I) কমপ্লেক্স তৈরি হয়।", "The precipitate dissolves and forms a colourless diamminesilver(I) complex.", "AgCl(s) + 2NH₃(aq) ⇌ [Ag(NH₃)₂]⁺(aq) + Cl⁻(aq)"],
+];
+
+function renderReactionTests() {
+  const [bn, en, equation] = chlorideResults[chlorideStep];
+  $("chloride-result").textContent = tr(bn, en);
+  $("chloride-equation").textContent = equation;
+  $("chloride-equation").hidden = !equation;
+  $("chloride-liquid").dataset.state = chlorideStep === 2 ? "precipitate" : "clear";
+  document.querySelectorAll("[data-chloride]").forEach(button => {
+    const step = Number(button.dataset.chloride);
+    button.disabled = step ? step !== chlorideStep + 1 : chlorideStep === 0;
+  });
+
+  $("ethane-liquid").dataset.state = bromineAdded ? "bromine" : "clear";
+  $("add-bromine").disabled = bromineAdded;
+  $("reset-bromine").disabled = !bromineAdded;
+  $("bromine-result").textContent = bromineAdded
+    ? tr("ইথিনে ব্রোমিন পানির কমলা-বাদামি রং মিলিয়ে যায়। ইথেনে স্বাভাবিক পরীক্ষার শর্তে রং থাকে।",
+         "Ethene decolourises the orange-brown bromine water. Ethane retains the colour under the test conditions.")
+    : tr("ব্রোমিন পানি যোগ করে দুই নলের রং তুলনা করো।", "Add bromine water to compare the two tubes.");
 }
-document.querySelectorAll("[data-ion]").forEach(btn=>btn.onclick=()=>{ion=btn.dataset.ion;render();});
-document.querySelectorAll("[data-model]").forEach(btn=>btn.onclick=()=>{mode=btn.dataset.model;render();});
-for(const axis of ["yaw","pitch"]) $(axis).oninput=render;
+
+function renderModel() {
+  const model = models[Number(compound.value)];
+  const flat = mode === "2d";
+  const shape = tr(...model.shape);
+  $("model-shape").textContent = shape;
+  $("model-angle").textContent = model.angle;
+  $("model-vsepr").textContent = model.vsepr;
+  canvas.dataset.mode = mode;
+  canvas.setAttribute("aria-label", model.formula + " · " + shape + " · " + model.angle);
+  $("rotation").hidden = flat;
+  document.querySelectorAll("[data-model]").forEach(button => button.setAttribute("aria-pressed", button.dataset.model === mode));
+  drawMolecule(canvas, model, flat ? 20 : Number(yaw.value), flat ? 20 : Number(pitch.value), flat);
+}
+
+function renderFlame() {
+  const [colour, bn, en] = ions[ion];
+  $("flame-shape").setAttribute("fill", colour);
+  $("colour").textContent = ion + " · " + tr(bn, en);
+  document.querySelectorAll("[data-ion]").forEach(button => button.setAttribute("aria-pressed", button.dataset.ion === ion));
+}
+
+document.querySelectorAll("[data-ion]").forEach(button => button.onclick = () => {
+  ion = button.dataset.ion;
+  renderFlame();
+});
+document.querySelectorAll("[data-chloride]").forEach(button => button.onclick = () => {
+  chlorideStep = Number(button.dataset.chloride);
+  renderReactionTests();
+});
+$("add-bromine").onclick = () => { bromineAdded = true; renderReactionTests(); };
+$("reset-bromine").onclick = () => { bromineAdded = false; renderReactionTests(); };
+document.querySelectorAll("[data-model]").forEach(button => button.onclick = () => {
+  mode = button.dataset.model;
+  renderModel();
+});
+compound.onchange = renderModel;
+yaw.oninput = pitch.oninput = renderModel;
+canvas.onpointerdown = event => {
+  if (mode === "2d" || !event.isPrimary || event.button !== 0) return;
+  canvas.setPointerCapture(event.pointerId);
+  drag = {id: event.pointerId, x: event.clientX, y: event.clientY};
+};
+canvas.onpointermove = event => {
+  if (drag?.id !== event.pointerId) return;
+  const wrap = angle => (angle + 540) % 360 - 180;
+  yaw.value = wrap(Number(yaw.value) + (event.clientX - drag.x) * 1.25);
+  pitch.value = wrap(Number(pitch.value) + (event.clientY - drag.y) * 1.25);
+  drag.x = event.clientX;
+  drag.y = event.clientY;
+  renderModel();
+};
+canvas.onlostpointercapture = () => { drag = undefined; };
+
+const chapterDemos = {
+  "1-2": [["#flame", "শিখা পরীক্ষা", "Flame test"], ["#chloride", "ক্লোরাইড শনাক্তকরণ", "Chloride test"]],
+  "1-3": [["#water", "3D অণুর মডেল", "3D molecular models"], ["lab.html#periodic", "পর্যায় সারণি", "Periodic table"]],
+  "2-2": [["#bromine", "ব্রোমিন পানির পরীক্ষা", "Bromine water test"], ["#water", "জৈব অণুর আকৃতি", "Organic molecular shapes"]],
+  "2-3": [["lab.html#titration", "অ্যাসিড–ক্ষার টাইট্রেশন", "Acid–base titration"]],
+  "2-4": [["lab.html#electrolysis", "তড়িৎ বিশ্লেষণের মডেল", "Electrolysis model"]],
+};
+
+function renderChapterIndex() {
+  $("chapter-index").innerHTML = ["1", "2"].map(paper => {
+    const title = paper === "1" ? tr("প্রথম পত্র", "Paper 1") : tr("দ্বিতীয় পত্র", "Paper 2");
+    const items = chapters.filter(([id]) => id.startsWith(paper + "-")).map(([id, bn, en]) => {
+      const links = [...(chapterDemos[id] || [])];
+      if (activities.some(activity => activity.chapter === id)) links.push(["#activity-" + id, "ধারণা অনুশীলন", "Concept practice"]);
+      return '<li><strong>' + h(tr(bn, en)) + '</strong><br>' + links
+        .map(([url, label, labelEn]) => '<a href="' + h(url) + '">' + h(tr(label, labelEn)) + '</a>').join("") + '</li>';
+    });
+    return '<section class="chapter-paper"><h3>' + h(title) + '</h3><ul>' + items.join("") + '</ul></section>';
+  }).join("");
+}
 function renderActivities() {
   $("activities").innerHTML=activities.map(activity=>'<section class="sc-card" id="activity-'+activity.chapter+'"><h2>'+h(tr(activity.name,activity.nameEn))+'</h2><p>'+h(tr(activity.title,activity.titleEn))+'</p><div class="sc-actions">'+tr(activity.options,activity.optionsEn).map((option,i)=>'<button data-option="'+i+'">'+h(option)+'</button>').join("")+'</div><p role="status"></p></section>').join("");
   for(const activity of activities) {
@@ -56,5 +130,11 @@ function renderActivities() {
     });
   }
 }
-languageButton(()=>{ render(); renderActivities(); });
+languageButton(() => {
+  renderChapterIndex();
+  renderFlame();
+  renderReactionTests();
+  renderModel();
+  renderActivities();
+});
 if(location.hash) document.getElementById(location.hash.slice(1))?.scrollIntoView();
