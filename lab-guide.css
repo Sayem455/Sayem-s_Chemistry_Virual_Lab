@@ -27,7 +27,6 @@
 .guide-icon { color: #356184; }
 .guide-pick strong { font-size: 1rem; }
 .guide-pick small { font-size: .83rem; }
-.guide-symbols .guide-pick .safety-sign { width: 40px; }
 .guide-detail {
   padding: 12px;
   border: 1px solid #d5e1f1;
@@ -40,7 +39,7 @@
 .guide-detail ul { padding-inline-start: 1.25em; margin: 6px 0 0; }
 .guide-detail li + li { margin-top: 5px; }
 .guide-tool-body { display: grid; grid-template-columns: auto 1fr; gap: 12px; align-items: start; }
-.guide-tool-body .guide-icon, .guide-tool-body .safety-sign { width: 64px; height: 64px; max-width: none; }
+.guide-tool-body .guide-icon { width: 64px; height: 64px; max-width: none; }
 .guide-pictograms { display: flex; gap: 8px; flex-wrap: wrap; margin: 10px 0; }
 .guide-pictograms figure { margin: 0; text-align: center; width: 79px; }
 .guide-pictograms .safety-sign { width: 54px; margin: 0 auto; }
@@ -60,3 +59,18 @@
 .guide-habit summary { min-height: 30px; font-weight: 700; color: #79391a; cursor: pointer; }
 .guide-habit p { margin: 6px 0; }
 .guide-references { font-size: .9rem; }
+
+.guide-card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); gap: 12px; }
+.guide-study-card { min-width: 0; padding: 13px; border: 1px solid #d5e1f1; border-radius: 12px; background: #f5f9ff; }
+.guide-card-image { display: flex; justify-content: center; align-items: center; gap: 8px; margin-bottom: 10px; min-height: 72px; }
+.guide-card-image > .guide-icon { width: 72px; height: 72px; }
+.guide-card-image > .safety-sign { width: 72px; }
+.guide-study-card h3 { text-align: center; margin-bottom: 10px; }
+.guide-study-card dl { margin: 0; }
+.guide-study-card dl > div + div { margin-top: 8px; }
+.guide-study-card dt { color: #234fa5; font-weight: 700; }
+.guide-study-card dd { margin: 2px 0 0; }
+.guide-legacy-sign { position: relative; display: grid; place-items: center; width: 58px; aspect-ratio: 1; background: #f89b37; color: #171717; border: 1px solid #9d570f; }
+.guide-legacy-sign .safety-sign { width: 49px; max-width: none; clip-path: polygon(50% 13%, 87% 50%, 50% 87%, 13% 50%); mix-blend-mode: multiply; }
+.guide-legacy-code { position: absolute; top: 0; right: 3px; font: bold .75rem/1.2 system-ui, sans-serif; }
+.guide-legacy-cross { font: 900 3rem/.85 system-ui, sans-serif; }

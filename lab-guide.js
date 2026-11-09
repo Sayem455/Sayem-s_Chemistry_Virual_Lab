@@ -1,21 +1,51 @@
 import {$, escapeHTML as h, languageButton, tr} from "./shared.js";
 
-const safetyGear = [
+const personalProtection = [
+  {
+    id: "apron", name: ["রাসায়নিক-প্রতিরোধী এপ্রন", "Chemical-resistant apron"],
+    job: ["রাসায়নিকের ছিটা থেকে শরীরের সামনের অংশ ও পোশাক রক্ষা করে।", "Protects the front of the body and clothing from splashes."],
+    use: ["ক্ষয়কারী দ্রবণ ছিটকে পড়ার ঝুঁকি থাকলে ঝুঁকি মূল্যায়ন অনুযায়ী ল্যাব কোটের ওপর পরা হয়।", "Wear it over a lab coat when the assessment calls for added splash protection."],
+    example: ["ঘন HCl নিয়ে প্রশিক্ষিত ব্যক্তির কাজে অ্যাসিড-প্রতিরোধী এপ্রন।", "An acid-resistant apron for authorized work with concentrated HCl."],
+  },
   {
     id: "goggles", name: ["সুরক্ষা গগলস", "Splash goggles"],
     job: ["রাসায়নিকের ছিটা থেকে চোখ রক্ষা করে।", "Protect the eyes from chemical splashes."],
     use: ["ছিটকে পড়ার ঝুঁকি আছে এমন পরীক্ষায় শুরু থেকেই চোখের চারপাশ ঢেকে পরো।", "Wear splash goggles from the start of splash-risk work, fitted around the eyes."],
+    example: ["NaOH দ্রবণ বা অ্যাসিড নিয়ে ছিটা লাগতে পারে এমন কাজ।", "Splash-risk work with NaOH solution or an acid."],
   },
   {
     id: "coat", name: ["ল্যাব কোট", "Lab coat"],
     job: ["শরীর ও পোশাকের ওপর সুরক্ষার স্তর তৈরি করে।", "Provide a protective layer over skin and clothing."],
     use: ["পরীক্ষার ঝুঁকি অনুযায়ী শিক্ষকের নির্ধারিত কোট বা অ্যাপ্রন পরো ও সামনের অংশ বন্ধ রাখো।", "Use the coat or apron specified by your teacher for the experiment and fasten it."],
+    example: ["Na₂CO₃ বা CuSO₄·5H₂O নিয়ে অনুমোদিত ল্যাবের কাজ।", "Authorized lab work with Na₂CO₃ or CuSO₄·5H₂O."],
   },
   {
     id: "gloves", name: ["সুরক্ষা গ্লাভস", "Protective gloves"],
     job: ["হাতে রাসায়নিক লাগার ঝুঁকি কমায়।", "Reduce chemical contact with the hands."],
     use: ["রাসায়নিকের SDS ও শিক্ষকের নির্দেশনা অনুযায়ী গ্লাভস বেছে নাও। দূষিত বা ছেঁড়া গ্লাভস বদলাও।", "Choose gloves for the specific chemical using its SDS and your teacher’s instructions. Replace contaminated or torn gloves."],
+    example: ["NaOH দ্রবণের জন্য গ্লাভস বাছাইয়ে ঘনমাত্রা ও সংস্পর্শের সময় বিবেচনা করো।", "For NaOH solution, consider the concentration and contact time when selecting gloves."],
   },
+  {
+    id: "mask", name: ["মাস্ক ও রেসপিরেটর", "Mask and respirator"],
+    job: ["ছবির সাধারণ মাস্ক বড় ফোঁটা আটকাতে সাহায্য করে। অনুমোদিত কণা-ফিল্টার রেসপিরেটর নির্দিষ্ট ধুলা বা কণার জন্য ব্যবহৃত হয়।", "The ordinary mask pictured helps block large droplets. An approved particulate respirator is intended for specified dusts or particles."],
+    use: ["শ্বাস-সুরক্ষা প্রয়োজন হলে দায়িত্বপ্রাপ্ত ব্যক্তি ঝুঁকি অনুযায়ী রেসপিরেটর বাছাই ও ফিট যাচাই করেন।", "When respiratory protection is needed, the responsible person selects the respirator and verifies its fit."],
+    example: ["ঘন HCl-এর বাষ্পের জন্য সাধারণ মাস্ক বা N95 যথেষ্ট সুরক্ষা দেয় না। এ কাজের জন্য চালু ফিউম হুড ও অনুমোদিত পদ্ধতি দরকার।", "Ordinary masks and N95 respirators do not protect against concentrated HCl vapour. This work requires an operating fume hood and an approved procedure."],
+  },
+  {
+    id: "shield", name: ["ফেস শিল্ড", "Face shield"],
+    job: ["মুখের বড় অংশকে রাসায়নিকের ছিটা থেকে আড়াল করে।", "Shields much of the face from splashes."],
+    use: ["ছিটা বেশি হওয়ার ঝুঁকিতে গগলসের সঙ্গে বাড়তি সুরক্ষা হিসেবে পরা হয়।", "Wear it with splash goggles as added protection when the splash risk is higher."],
+    example: ["ঘন অ্যাসিড বা ক্ষার নিয়ে প্রশিক্ষিত ব্যক্তির ছিটা-ঝুঁকির কাজ।", "Authorized splash-risk work with concentrated acids or bases."],
+  },
+  {
+    id: "shoes", name: ["পা ঢাকা জুতা", "Closed-toe shoes"],
+    job: ["রাসায়নিকের ছিটা ও পড়ে যাওয়া কাচ থেকে পা ঢেকে রাখে।", "Cover feet against splashes and dropped glass."],
+    use: ["ল্যাবে ঢোকার আগেই পায়ের আঙুল ও ওপরের অংশ ঢাকা জুতা পরো।", "Put on shoes that cover the toes and tops of the feet before entering the lab."],
+    example: ["যেকোনো রাসায়নিকের ব্যবহারিক ক্লাসে, যেমন NaCl দ্রবণ তৈরির সময়ও।", "For all practical lab sessions, including preparation of a NaCl solution."],
+  },
+];
+
+const safetyGear = [
   {
     id: "hood", name: ["ফিউম হুড", "Fume hood"],
     job: ["উৎপন্ন ক্ষতিকর বাষ্প বা গ্যাস কাজের জায়গা থেকে টেনে সরায়।", "Extract hazardous vapours or gases from the working area."],
@@ -45,6 +75,36 @@ const safetyGear = [
     id: "spill", name: ["স্পিল কিট", "Spill kit"],
     job: ["অনুমোদিত পদ্ধতিতে ছড়িয়ে পড়া রাসায়নিক সামলানোর সরঞ্জাম রাখে।", "Hold supplies for responding to a chemical spill with an approved procedure."],
     use: ["রাসায়নিক পড়ে গেলে অন্যদের দূরে রাখো ও শিক্ষককে জানাও। প্রশিক্ষিত ব্যক্তি পদার্থের ধরন বুঝে কিট ব্যবহার করবেন।", "Keep others away from a spill and notify the teacher. A trained person chooses the response for the specific chemical."],
+  },
+  {
+    id: "sink", name: ["ল্যাব সিঙ্ক", "Lab sink"],
+    job: ["হাত ধোয়া ও অনুমোদিত কাচপাত্র পরিষ্কারের জন্য পানি দেয়।", "Provides water for handwashing and approved glassware cleaning."],
+    use: ["কাজ শেষে হাত ধোও। রাসায়নিক বর্জ্যের জন্য শিক্ষকের নির্ধারিত পাত্র ব্যবহার করো।", "Wash hands after lab work. Use the designated container for chemical waste."],
+  },
+  {
+    id: "blanket", name: ["অগ্নিনিরোধক কম্বল", "Fire blanket"],
+    job: ["ল্যাবের নিয়মে অনুমোদিত হলে প্রশিক্ষিত ব্যক্তি বেঞ্চে লাগা ছোট আগুন ঢেকে নেভাতে এটি ব্যবহার করেন।", "Used by trained personnel to smother a small bench fire where laboratory procedures allow."],
+    use: ["আগুন দেখলে শিক্ষককে জানাও এবং জরুরি বহির্গমন নির্দেশনা অনুসরণ করো।", "Alert the teacher to a fire and follow the evacuation procedure."],
+  },
+  {
+    id: "alarm", name: ["অগ্নিসংকেত ও জরুরি বহির্গমন", "Fire alarm and emergency exit"],
+    job: ["বিপদ সম্পর্কে সবাইকে জানায় এবং নিরাপদে বের হওয়ার পথ দেখায়।", "Alert occupants to danger and identify the evacuation route."],
+    use: ["কাজের আগেই সংকেত ও বের হওয়ার পথ চিনে রাখো। সংকেত বাজলে শিক্ষকের নির্দেশে বের হও।", "Identify the alarm and exit route before work. Follow the teacher’s instructions when the alarm sounds."],
+  },
+  {
+    id: "glass-bin", name: ["ভাঙা কাচের পাত্র", "Broken-glass bin"],
+    job: ["ধারালো ভাঙা কাচ অন্য বর্জ্য থেকে আলাদা রাখে।", "Keeps sharp broken glass separate from other waste."],
+    use: ["কাচ ভাঙলে শিক্ষককে জানাও। রাসায়নিক-দূষিত কাচের জন্য ল্যাবের নির্ধারিত বর্জ্যপদ্ধতি প্রযোজ্য।", "Report broken glass to the teacher. Follow the designated waste procedure for chemically contaminated glass."],
+  },
+  {
+    id: "gas-valve", name: ["গ্যাস বন্ধ করার ভালভ", "Gas shutoff valve"],
+    job: ["জরুরি অবস্থায় ল্যাবের গ্যাস সরবরাহ বন্ধ করার ব্যবস্থা।", "Allows the laboratory gas supply to be shut off in an emergency."],
+    use: ["এর অবস্থান আগে চিনে রাখো। গ্যাসের গন্ধ বা লিক সন্দেহ হলে শিক্ষককে জানাও ও জরুরি নির্দেশ অনুসরণ করো।", "Locate it before work. If you suspect a leak, alert the teacher and follow the emergency instructions."],
+  },
+  {
+    id: "phone", name: ["জরুরি ফোন", "Emergency phone"],
+    job: ["ল্যাবে দুর্ঘটনার খবর দেওয়া ও জরুরি সাহায্য চাওয়ার ব্যবস্থা।", "Provides a way to report incidents and call for emergency assistance."],
+    use: ["কাজের আগে ফোন ও ল্যাবের জরুরি নম্বর কোথায় আছে জেনে রাখো।", "Locate the phone and the lab’s emergency numbers before starting work."],
   },
 ];
 
@@ -119,6 +179,85 @@ const symbols = [
   {id: "explosive", code: "GHS01", name: ["বিস্ফোরণ", "Exploding bomb"], job: ["বিস্ফোরক বা নির্দিষ্ট অস্থিতিশীল পদার্থের ঝুঁকি।", "Explosive or certain unstable substances."]},
   {id: "gas", code: "GHS04", name: ["গ্যাস সিলিন্ডার", "Gas cylinder"], job: ["চাপযুক্ত গ্যাসের ঝুঁকি।", "Gases under pressure."]},
   {id: "health", code: "GHS08", name: ["গুরুতর স্বাস্থ্যঝুঁকি", "Serious health hazard"], job: ["ক্যানসার, অঙ্গের ক্ষতি বা শ্বাসতন্ত্রের সংবেদনশীলতার মতো নির্দিষ্ট গুরুতর ঝুঁকি।", "Specific serious hazards such as cancer, organ damage or respiratory sensitization."]},
+];
+
+const hazardLessons = {
+  flame: {
+    legacy: ["F", "F+"],
+    example: ["ইথানল · দাহ্য তরল শ্রেণি ২ (H225)। ডাইইথাইল ইথার · শ্রেণি ১ (H224), অত্যন্ত দাহ্য।", "Ethanol · flammable liquid category 2 (H225). Diethyl ether · category 1 (H224), extremely flammable."],
+    precaution: ["তাপ, স্ফুলিঙ্গ ও খোলা শিখা থেকে দূরে রাখো। ব্যবহার শেষে পাত্র বন্ধ রাখো।", "Keep away from heat, sparks and open flames. Close the container after use."],
+    source: "https://hcis.safeworkaustralia.gov.au/HazardousChemical/Details?chemicalID=1340",
+  },
+  corrosion: {
+    legacy: ["C"],
+    example: ["কঠিন NaOH · ত্বকের ক্ষয় শ্রেণি ১এ (H314)। চোখেও গুরুতর ক্ষতি করতে পারে।", "Solid NaOH · skin corrosion category 1A (H314). It can also cause serious eye damage."],
+    precaution: ["ছিটা-রোধী গগলস ও পদার্থের উপযোগী গ্লাভস বেছে নাও। ঝুঁকি অনুযায়ী এপ্রন ও ফেস শিল্ড যোগ করো।", "Use splash goggles and compatible gloves. Add an apron and face shield as called for by the risk assessment."],
+    source: "https://www.carlroth.com/downloads/sdb/en/6/SDB_6771_MT_EN.pdf",
+  },
+  skull: {
+    legacy: ["T", "T+"],
+    example: ["সোডিয়াম অ্যাজাইড (NaN₃) · গিলে ফেলার তীব্র বিষাক্ততা শ্রেণি ২ (H300)। H301 মানে গিলে ফেললে বিষাক্ত, H300 মানে গিলে ফেললে প্রাণঘাতী হতে পারে।", "Sodium azide (NaN₃) · acute oral toxicity category 2 (H300). H301 indicates toxic if swallowed, while H300 indicates potentially fatal oral exposure."],
+    precaution: ["সংস্পর্শ এড়াও। এ ধরনের নমুনা কেবল প্রশিক্ষিত ও অনুমোদিত কর্মীর জন্য।", "Avoid exposure. Leave these materials to trained, authorized personnel."],
+    source: "https://www.carlroth.com/downloads/sdb/en/K/SDB_K305_MT_EN.pdf",
+  },
+  exclamation: {
+    legacy: ["Xi", "Xn"],
+    example: ["পানিশূন্য Na₂CO₃ · চোখে জ্বালা শ্রেণি ২ (H319)। CuSO₄·5H₂O · গিলে ফেলার তীব্র বিষাক্ততা শ্রেণি ৪ (H302), অর্থাৎ ক্ষতিকারক।", "Anhydrous Na₂CO₃ · eye irritation category 2 (H319). CuSO₄·5H₂O · acute oral toxicity category 4 (H302), harmful if swallowed."],
+    precaution: ["ধুলা ও ছিটা এড়াও। বোতলের লেবেল দেখে উপযুক্ত চোখ ও হাতের সুরক্ষা ব্যবহার করো।", "Avoid dust and splashes. Check the label for suitable eye and hand protection."],
+    source: "https://www.carlroth.com/downloads/sdb/en/P/SDB_P025_GB_EN.pdf",
+  },
+  environment: {
+    legacy: ["N"],
+    example: ["CuSO₄·5H₂O · দীর্ঘমেয়াদি জলজ ঝুঁকি শ্রেণি ১ (H410)।", "CuSO₄·5H₂O · chronic aquatic hazard category 1 (H410)."],
+    precaution: ["সিঙ্ক বা মাটিতে ছড়ানো ঠেকাও। বর্জ্য নির্ধারিত পাত্রে রাখো।", "Prevent release into drains or soil. Collect waste in the designated container."],
+    source: "https://www.carlroth.com/downloads/sdb/en/P/SDB_P025_GB_EN.pdf",
+  },
+  oxidizer: {
+    legacy: ["O"],
+    example: ["কঠিন KMnO₄ · জারক কঠিন পদার্থ শ্রেণি ২ (H272)।", "Solid KMnO₄ · oxidizing solid category 2 (H272)."],
+    precaution: ["দাহ্য পদার্থ থেকে আলাদা রাখো। শিক্ষকের অনুমতি ছাড়া অন্য বিকারকের সঙ্গে মেশাবে না।", "Keep away from combustible material. Mix with other reagents only as authorized by your teacher."],
+    source: "https://hcis.safeworkaustralia.gov.au/HazardousChemical/Details?chemicalID=3631",
+  },
+  explosive: {
+    legacy: ["E"],
+    example: ["TNT · বিস্ফোরক বিভাগ ১.১ (H201)। একই সঙ্গে বড় অংশ বিস্ফোরিত হওয়ার ঝুঁকি।", "TNT · explosive division 1.1 (H201), a mass explosion hazard."],
+    precaution: ["সন্দেহজনক পাত্র থেকে দূরে সরে দায়িত্বপ্রাপ্ত ব্যক্তিকে জানাও।", "Move away from a suspect container and alert the responsible person."],
+    source: "https://www.epa.govt.nz/database-search/approved-hazardous-substances-with-controls/view/D4BB7F23-F0C2-417A-AF16-8191575C7C39/",
+  },
+  gas: {
+    example: ["সংকুচিত নাইট্রোজেন (N₂) · চাপযুক্ত গ্যাস (H280)। গরম হলে সিলিন্ডার ফাটতে পারে।", "Compressed nitrogen (N₂) · gas under pressure (H280). The cylinder may burst if heated."],
+    precaution: ["তাপ থেকে দূরে রাখো। সিলিন্ডার স্থির করা ও ব্যবহার প্রশিক্ষিত ব্যক্তির কাজ।", "Keep cylinders away from heat. Trained personnel secure and operate them."],
+    source: "https://static.prd.echannel.linde.com/wcsstore/LT_REN_Industrial_Gas_Store/pdf/SDS_LT/EN/Nitrogen-compressed_Biogon-N_1.1-ENLT_tcm619-456706.pdf",
+  },
+  health: {
+    example: ["বেনজিন · ক্যান্সার সৃষ্টির ঝুঁকি শ্রেণি ১এ (H350)। মিথানল · একবারের সংস্পর্শে নির্দিষ্ট অঙ্গের ক্ষতি শ্রেণি ১ (H370)।", "Benzene · carcinogenicity category 1A (H350). Methanol · specific target organ toxicity after single exposure, category 1 (H370)."],
+    precaution: ["কম ঝুঁকির অনুমোদিত বিকল্প বেছে নাও। সংস্পর্শ নিয়ন্ত্রণে ল্যাবের অনুমোদিত পদ্ধতি অনুসরণ করো।", "Choose an approved, lower-hazard substitute. Follow the lab’s approved exposure controls."],
+    source: "https://hcis.safeworkaustralia.gov.au/HazardousChemical/Details?chemicalID=359",
+  },
+};
+
+const labWarnings = [
+  {
+    id: "radiation", name: ["আয়নকারী বিকিরণ", "Ionizing radiation"],
+    job: ["ট্রিফয়েল আয়নকারী বিকিরণের উৎস বা নিয়ন্ত্রিত এলাকা চেনায়।", "The trefoil identifies an ionizing radiation source or controlled area."],
+    example: ["এক্স-রে কক্ষের প্রবেশপথ। প্রাপ্ত ডোজের ওপর ক্ষতির মাত্রা নির্ভর করে।", "Example: an X-ray room entrance. The severity of harm depends on the dose received."],
+    precaution: ["প্রবেশের নির্দেশ মানো। প্রশিক্ষিত কর্মীরা সময়, দূরত্ব ও আড়াল নিয়ন্ত্রণ করেন।", "Follow access signs. Trained workers manage time, distance and shielding."],
+    source: "https://www.osha.gov/ionizing-radiation/background",
+  },
+  {
+    id: "biohazard", name: ["জৈব ঝুঁকি", "Biological hazard"],
+    job: ["সংক্রমণ ঘটাতে পারে এমন নমুনা বা নিয়ন্ত্রিত এলাকার সতর্কতা।", "Warns of potentially infectious samples or controlled areas."],
+    example: ["সংক্রমণ-সন্দেহযুক্ত নমুনার পাত্র। মাত্রা নমুনা, জীবাণু ও সংস্পর্শের ওপর নির্ভর করে।", "Example: a potentially infectious specimen container. Risk depends on the specimen, agent and exposure."],
+    precaution: ["পাত্র খুলবে না। প্রবেশ ও নমুনা ব্যবহারে দায়িত্বপ্রাপ্ত ব্যক্তির নির্দেশ মানো।", "Leave containers closed. Follow the responsible person’s access and handling instructions."],
+    source: "https://www.cdc.gov/labs/pdf/SF__19_308133-A_BMBL6_00-BOOK-WEB-final-3.pdf",
+  },
+  {
+    id: "electricity", name: ["বৈদ্যুতিক বিপদ", "Electrical hazard"],
+    job: ["বিদ্যুৎস্পৃষ্ট হওয়া বা পোড়ার ঝুঁকি জানায়।", "Warns of electric shock or burns."],
+    example: ["উচ্চ ভোল্টেজের বিদ্যুৎ সরবরাহ যন্ত্র। ভোল্টেজ, কারেন্ট ও সংস্পর্শের সময়ের সঙ্গে ঝুঁকি বদলায়।", "Example: a high-voltage power supply. Risk varies with voltage, current and contact time."],
+    precaution: ["হাত শুকনো রাখো। ক্ষতিগ্রস্ত তার বা যন্ত্র দেখলে স্পর্শ না করে শিক্ষককে জানাও।", "Keep hands dry. Report damaged cords or equipment to the teacher and avoid contact."],
+    source: "https://www.osha.gov/electrical",
+  },
 ];
 
 const chemicals = [
@@ -243,20 +382,70 @@ function chemicalDetail(entry) {
     <a class="guide-reference-link" href="${h(entry.source)}">${tr("এই নমুনার SDS", "Safety data sheet for this product")}</a>`;
 }
 
-const renderGear = makePicker("gear-picks", "gear-info", safetyGear, toolButton, toolDetail);
+function card(title, image, rows, footer = "") {
+  return `<article class="guide-study-card">
+    <div class="guide-card-image">${image}</div>
+    <h3>${h(title)}</h3>
+    <dl>${rows.map(([label, body]) => `<div><dt>${h(label)}</dt><dd>${h(body)}</dd></div>`).join("")}</dl>
+    ${footer}
+  </article>`;
+}
+
+function sourceLink(url) {
+  return `<a class="guide-reference-link" href="${h(url)}">${tr("তথ্যসূত্র", "Reference")}</a>`;
+}
+
+function protectionCard(entry) {
+  return card(tr(...entry.name), icon(entry.id), [
+    [tr("কেন ব্যবহার করি", "Why it is used"), tr(...entry.job)],
+    [tr("কখন ব্যবহার করি", "When it is used"), tr(...entry.use)],
+    ...(entry.example ? [[tr("রাসায়নিকের উদাহরণ", "Chemical example"), tr(...entry.example)]] : []),
+  ]);
+}
+
+function legacySign(id, code) {
+  const image = id === "exclamation" ? '<span class="guide-legacy-cross">×</span>' : sign(id);
+  return `<span class="guide-legacy-sign">${image}<span class="guide-legacy-code">${h(code)}</span></span>`;
+}
+
+const legacyNames = {
+  F: ["সহজে দাহ্য", "Highly flammable"], "F+": ["অত্যন্ত দাহ্য", "Extremely flammable"],
+  T: ["বিষাক্ত", "Toxic"], "T+": ["অত্যন্ত বিষাক্ত", "Very toxic"],
+  Xi: ["উত্তেজক", "Irritant"], Xn: ["ক্ষতিকারক", "Harmful"],
+  C: ["ক্ষয়কারী", "Corrosive"], O: ["জারক", "Oxidizing"],
+  E: ["বিস্ফোরক", "Explosive"], N: ["পরিবেশের জন্য ক্ষতিকর", "Dangerous for the environment"],
+};
+
+function hazardCard(entry) {
+  const lesson = hazardLessons[entry.id];
+  const oldCodes = lesson.legacy || [];
+  const images = sign(entry.id) + oldCodes.map(code => legacySign(entry.id, code)).join("");
+  const oldLabels = oldCodes.map(code => code + " · " + tr(...legacyNames[code]));
+  return card(entry.code + " · " + tr(...entry.name), images, [
+    [tr("কোন ঝুঁকি", "Hazard"), tr(...entry.job)],
+    ...(oldLabels.length ? [[tr("পুরোনো লেবেল", "Legacy labels"), oldLabels.join(" / ")]] : []),
+    [tr("উদাহরণ ও মাত্রা", "Example and severity"), tr(...lesson.example)],
+    [tr("সতর্কতা", "Precautions"), tr(...lesson.precaution)],
+  ], sourceLink(lesson.source));
+}
+
+function labWarningCard(entry) {
+  return card(tr(...entry.name), icon(entry.id), [
+    [tr("কোন ঝুঁকি", "Hazard"), tr(...entry.job)],
+    [tr("উদাহরণ ও মাত্রা", "Example and severity"), tr(...entry.example)],
+    [tr("সতর্কতা", "Precautions"), tr(...entry.precaution)],
+  ], sourceLink(entry.source));
+}
 const renderEquipment = makePicker("equipment-picks", "equipment-detail", equipment, toolButton, toolDetail);
 const renderChemicals = makePicker("chemical-picks", "chemical-detail", chemicals,
   entry => `<strong>${h(entry.formula)}</strong><small>${h(tr(...entry.name))}</small>`, chemicalDetail);
-const renderSymbols = makePicker("symbol-picks", "symbol-detail", symbols,
-  entry => sign(entry.id) + `<span>${h(tr(...entry.name))}</span>`,
-  entry => `<div class="guide-tool-body">${sign(entry.id)}<div>
-    <h3>${h(entry.code)} · ${h(tr(...entry.name))}</h3><p>${h(tr(...entry.job))}</p></div></div>`);
-
 languageButton(() => {
-  renderGear();
+  $("ppe-cards").innerHTML = personalProtection.map(protectionCard).join("");
+  $("gear-cards").innerHTML = safetyGear.map(protectionCard).join("");
+  $("symbol-cards").innerHTML = symbols.map(hazardCard).join("");
+  $("other-warning-cards").innerHTML = labWarnings.map(labWarningCard).join("");
   renderEquipment();
   renderChemicals();
-  renderSymbols();
   const expanded = [...$("habit-list").querySelectorAll("details")].map(detail => detail.open);
   $("habit-list").innerHTML = habits.map(([title, explanation], index) =>
     `<details class="guide-habit"${expanded[index] ? " open" : ""}><summary>${h(tr(...title))}</summary><p>${h(tr(...explanation))}</p></details>`
