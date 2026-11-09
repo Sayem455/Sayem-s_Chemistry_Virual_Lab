@@ -1,5 +1,6 @@
 import {$, bindAuth, connect, escapeHTML as h, lang, languageButton, rows, setupMessage, tr} from "./shared.js";
 import {chapters,types} from "./content.js";
+import {firebaseConfig} from "./firebase-config.js";
 
 let db;
 let auth;
@@ -24,6 +25,7 @@ const select = (name,label,options,value="") =>
   '<label>'+label+'<select name="'+name+'" required>'+options.map(([id,title])=>'<option value="'+h(id)+'" '+(id===value?"selected":"")+'>'+h(title)+'</option>').join("")+'</select></label>';
 const localized = (name,bn,en) => field(name,tr(bn,en))+field(name+"En",en+" (EN)","text",false);
 const publicField = () => '<label><span><input type="checkbox" name="public" style="width:auto"> '+tr("সবার জন্য প্রকাশ","Publish publicly")+'</span></label>';
+const batchField = () => field("batch",tr("ব্যাচ (ঐচ্ছিক)","Batch (optional)"),"text",false);
 const chapterField = () => select("chapter",tr("অধ্যায়","Chapter"),chapters.map(([id,bn,en])=>[id,tr(bn,en)]));
 const studentField = () => select("uid",tr("শিক্ষার্থী","Student"),[["","—"],...students.filter(s=>!batch||s.batch===batch).map(s=>[s.id,s.name+" · "+s.batch+" · "+s.roll])],student);
 const dayField = () => field("date",tr("তারিখ","Date"),"date",true,date());
@@ -48,11 +50,12 @@ function fields() {
     case "attendance": return studentField()+dayField()+stateField();
     case "marks": return studentField()+dayField()+field("title",tr("পরীক্ষা","Exam"))+
       field("score",tr("প্রাপ্ত নম্বর","Score"),"number",true,"",'min="0" step="any"')+field("total",tr("পূর্ণমান","Maximum"),"number",true,"",'min="0.01" step="any"');
-    case "fees": return studentField()+monthField()+field("title",tr("বেতনের বিবরণ","Fee description"))+
+    case "fees": return studentField()+monthField()+
+      field("dueDate",tr("ফি দেওয়ার শেষ তারিখ (খালি রাখলে মাসের শেষ দিন)","Fee deadline (blank uses month-end)"),"date",false)+field("title",tr("বেতনের বিবরণ","Fee description"))+
       field("amount",tr("টাকা","Amount (BDT)"),"number",true,"",'min="0" step="any"')+stateField();
-    case "notices": return dayField()+select("kind",tr("ধরন","Type"),[["notice",tr("নোটিশ","Notice")],["exam",tr("পরীক্ষা","Exam")],["schedule",tr("রুটিন","Schedule")]])+field("batch",tr("ব্যাচ (ঐচ্ছিক)","Batch (optional)"),"text",false)+localized("title","শিরোনাম","Title")+localized("body","বিবরণ","Details")+publicField();
-    case "resources": return chapterField()+select("type",tr("উপকরণের ধরন","Material type"),Object.entries(types).map(([id,n])=>[id,n[lang()==="en"?1:0]]))+localized("title","শিরোনাম","Title")+field("url",tr("ফাইল বা পেজের লিংক","File or page URL"),"url")+publicField();
-    case "quizzes": return chapterField()+localized("title","প্রশ্ন","Question")+
+    case "notices": return dayField()+select("kind",tr("ধরন","Type"),[["notice",tr("নোটিশ","Notice")],["exam",tr("পরীক্ষা","Exam")],["schedule",tr("রুটিন","Schedule")]])+batchField()+localized("title","শিরোনাম","Title")+localized("body","বিবরণ","Details")+publicField();
+    case "resources": return chapterField()+batchField()+select("type",tr("উপকরণের ধরন","Material type"),Object.entries(types).map(([id,n])=>[id,n[lang()==="en"?1:0]]))+localized("title","শিরোনাম","Title")+field("url",tr("ফাইল লিংক (ব্যক্তিগত ফাইলের জন্য gs:// ঠিকানা)","File link (use a gs:// address for private files)"))+publicField();
+    case "quizzes": return chapterField()+batchField()+localized("title","প্রশ্ন","Question")+
       field("options",tr("অপশন | দিয়ে আলাদা করো","Options separated by |"))+
       field("optionsEn","Options (EN)","text",false)+field("answer",tr("সঠিক অপশনের ক্রম (১ থেকে)","Correct option number (starts at 1)"),"number",true,1,'min="1"')+
       localized("explanation","উত্তরের ব্যাখ্যা","Explanation")+publicField();
@@ -121,6 +124,8 @@ function renderEntries() {
   box.querySelectorAll("[data-edit]").forEach(button=>button.onclick=()=>{
     const record=[...listed,...entries].find(r=>r.id===button.dataset.edit);
     const form=$("editor");
+    if (tab === "fees") valueOf(form,"dueDate").value = "";
+    if (["notices","resources","quizzes"].includes(tab)) valueOf(form,"batch").value = "";
     for(const [key,value] of Object.entries(record)) {
       const input=valueOf(form,key);
       if(!input) continue;
@@ -205,8 +210,14 @@ async function save(event) {
       }
     } else {
       data.public=!!data.public;
-      if(mode==="notices" && data.batch && data.public) throw new Error(tr("ব্যাচের নোটিশ ব্যক্তিগত রাখুন।","Keep batch notices private."));
-      if(mode==="resources" && !/^https?:\/\//i.test(data.url)) throw new Error("Use an HTTPS or HTTP link.");
+      if(data.batch && data.public) throw new Error(tr("ব্যাচের কনটেন্ট ব্যক্তিগত রাখুন।","Keep batch content private."));
+      if(mode==="resources") {
+        const privatePath = "gs://" + firebaseConfig.storageBucket + "/private-materials/";
+        const webLink = /^https?:\/\//i.test(data.url);
+        const existingLink = listed.some(item => item.id === editId && item.public !== true && item.url === data.url);
+        if (data.public ? !webLink : !data.url.startsWith(privatePath) && !(webLink && existingLink))
+          throw new Error(tr("পাবলিক কনটেন্টে ওয়েব লিংক এবং ব্যক্তিগত ফাইলে gs:// ঠিকানা দিন।","Use a web link for public content and a gs:// address for private files."));
+      }
       if(mode==="quizzes") {
         data.options=data.options.split("|").map(s=>s.trim()).filter(Boolean);
         data.optionsEn=data.optionsEn.split("|").map(s=>s.trim()).filter(Boolean);

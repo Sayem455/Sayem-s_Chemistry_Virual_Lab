@@ -1,0 +1,7 @@
+{
+  "buildCommand": "node server/build.js",
+  "outputDirectory": "dist",
+  "functions": {
+    "api/study-materials.js": { "includeFiles": "materials/**" }
+  }
+}
