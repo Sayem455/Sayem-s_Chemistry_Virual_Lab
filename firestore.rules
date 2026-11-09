@@ -23,11 +23,11 @@ service cloud.firestore {
       allow write: if admin();
     }
     match /resources/{id} {
-      allow read: if resource.data.public == true || student() || admin();
+      allow read: if resource.data.public == true || admin();
       allow write: if admin();
     }
     match /quizzes/{id} {
-      allow read: if resource.data.public == true || student() || admin();
+      allow read: if resource.data.public == true || admin();
       allow write: if admin();
     }
     match /notices/{id} {
