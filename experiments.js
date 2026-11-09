@@ -13,10 +13,17 @@ let chlorideStep = 0;
 let bromineAdded = false;
 let limewaterStep = 0;
 let drag;
+let showPairs = false;
+let spinFrame;
+let spinTime;
 const canvas = $("molecule");
 const compound = $("compound");
 const yaw = $("yaw");
 const pitch = $("pitch");
+const zoom = $("model-zoom");
+const pairsButton = $("model-pairs");
+const spinButton = $("model-spin");
+const wrapAngle = angle => (angle + 540) % 360 - 180;
 
 compound.replaceChildren(...models.map((model, i) => new Option(model.formula, i)));
 compound.value = String(models.findIndex(model => model.formula === "H₂O"));
@@ -67,9 +74,39 @@ function renderReactionTests() {
     : tr("ব্রোমিন পানি যোগ করে দুই নলের রং তুলনা করো।", "Add bromine water to compare the two tubes.");
 }
 
+function drawCurrentModel() {
+  const model = models[Number(compound.value)];
+  drawMolecule(canvas, model, {
+    yaw: mode === "2d" ? 20 : Number(yaw.value),
+    pitch: mode === "2d" ? 20 : Number(pitch.value),
+    zoom: Number(zoom.value) / 100,
+    mode,
+    showPairs: mode !== "fill" && showPairs && Boolean(model.lonePairs?.length),
+  });
+}
+
+function setSpin(active) {
+  if (spinFrame !== undefined) cancelAnimationFrame(spinFrame);
+  spinFrame = active ? requestAnimationFrame(spin) : undefined;
+  spinTime = undefined;
+  spinButton.setAttribute("aria-pressed", String(active));
+}
+
+function spin(time) {
+  if (spinTime !== undefined) {
+    yaw.value = wrapAngle(Number(yaw.value) + Math.min(time - spinTime, 50) * .045);
+    drawCurrentModel();
+  }
+  spinTime = time;
+  spinFrame = requestAnimationFrame(spin);
+}
+
 function renderModel() {
   const model = models[Number(compound.value)];
   const flat = mode === "2d";
+  const pairCount = model.lonePairs?.length || 0;
+  const pairsAvailable = mode !== "fill" && pairCount > 0;
+  const pairsVisible = pairsAvailable && showPairs;
   const shape = tr(...model.shape);
   $("model-shape").textContent = shape;
   $("model-angle").textContent = model.angle;
@@ -77,8 +114,18 @@ function renderModel() {
   canvas.dataset.mode = mode;
   canvas.setAttribute("aria-label", model.formula + " · " + shape + " · " + model.angle);
   $("rotation").hidden = flat;
+  pairsButton.disabled = !pairsAvailable;
+  pairsButton.setAttribute("aria-pressed", String(pairsVisible));
+  spinButton.disabled = flat;
+  spinButton.setAttribute("aria-pressed", String(spinFrame !== undefined));
+  $("model-zoom-value").textContent = zoom.value + "%";
+  const note = $("model-view-note");
+  note.hidden = mode !== "fill" && !pairsVisible;
+  note.textContent = mode === "fill"
+    ? tr("গোলকগুলো পরমাণুর আপেক্ষিক আকার বোঝায়। মাপগুলো ধারণাভিত্তিক।", "The spheres show relative atomic sizes on an illustrative scale.")
+    : tr("বেগুনি চিহ্নে কেন্দ্রীয় পরমাণুর নিঃসঙ্গ জোড়: ", "Purple markers show central-atom lone pairs: ") + pairCount;
   document.querySelectorAll("[data-model]").forEach(button => button.setAttribute("aria-pressed", button.dataset.model === mode));
-  drawMolecule(canvas, model, flat ? 20 : Number(yaw.value), flat ? 20 : Number(pitch.value), flat);
+  drawCurrentModel();
 }
 
 function renderFlame() {
@@ -104,23 +151,40 @@ document.querySelectorAll("[data-limewater]").forEach(button => button.onclick =
 });
 document.querySelectorAll("[data-model]").forEach(button => button.onclick = () => {
   mode = button.dataset.model;
+  if (mode === "2d") setSpin(false);
   renderModel();
 });
 compound.onchange = renderModel;
-yaw.oninput = pitch.oninput = renderModel;
+zoom.oninput = renderModel;
+pairsButton.onclick = () => {
+  showPairs = !showPairs;
+  renderModel();
+};
+spinButton.onclick = () => setSpin(spinFrame === undefined);
+$("model-reset").onclick = () => {
+  setSpin(false);
+  yaw.value = yaw.defaultValue;
+  pitch.value = pitch.defaultValue;
+  zoom.value = zoom.defaultValue;
+  renderModel();
+};
+yaw.oninput = pitch.oninput = () => {
+  setSpin(false);
+  drawCurrentModel();
+};
 canvas.onpointerdown = event => {
   if (mode === "2d" || !event.isPrimary || event.button !== 0) return;
+  setSpin(false);
   canvas.setPointerCapture(event.pointerId);
   drag = {id: event.pointerId, x: event.clientX, y: event.clientY};
 };
 canvas.onpointermove = event => {
   if (drag?.id !== event.pointerId) return;
-  const wrap = angle => (angle + 540) % 360 - 180;
-  yaw.value = wrap(Number(yaw.value) + (event.clientX - drag.x) * 1.25);
-  pitch.value = wrap(Number(pitch.value) + (event.clientY - drag.y) * 1.25);
+  yaw.value = wrapAngle(Number(yaw.value) + (event.clientX - drag.x) * 1.25);
+  pitch.value = wrapAngle(Number(pitch.value) + (event.clientY - drag.y) * 1.25);
   drag.x = event.clientX;
   drag.y = event.clientY;
-  renderModel();
+  drawCurrentModel();
 };
 canvas.onlostpointercapture = () => { drag = undefined; };
 

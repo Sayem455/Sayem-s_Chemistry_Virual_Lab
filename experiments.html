@@ -82,17 +82,36 @@
   <div class="model-picker">
     <label for="compound" data-bn="যৌগ বেছে নাও" data-en="Choose a compound">যৌগ বেছে নাও</label>
     <select id="compound"></select>
-    <div class="sc-actions"><button type="button" data-model="2d">2D</button><button type="button" data-model="3d">3D</button></div>
   </div>
-  <canvas class="sc-model molecule-view" width="390" height="260" id="molecule" role="img" aria-label="H₂O"></canvas>
+  <div class="sc-actions model-tools">
+    <button type="button" data-model="2d">2D</button>
+    <button type="button" data-model="3d" data-bn="3D বল-স্টিক" data-en="3D ball and stick">3D বল-স্টিক</button>
+    <button type="button" data-model="fill" data-bn="স্পেস-ফিলিং" data-en="Space filling">স্পেস-ফিলিং</button>
+  </div>
+  <div class="model-stage">
+    <canvas class="sc-model molecule-view" width="390" height="260" id="molecule" role="img" aria-label="H₂O"></canvas>
+  </div>
   <dl class="model-facts">
     <div><dt data-bn="আকৃতি" data-en="Shape">আকৃতি</dt><dd id="model-shape"></dd></div>
     <div><dt data-bn="বন্ধন কোণ" data-en="Bond angle">বন্ধন কোণ</dt><dd id="model-angle"></dd></div>
     <div><dt data-bn="VSEPR / সংকরায়ন" data-en="VSEPR / hybridisation">VSEPR / সংকরায়ন</dt><dd id="model-vsepr"></dd></div>
   </dl>
+  <div class="sc-actions model-tools">
+    <button type="button" id="model-pairs" data-bn="নিঃসঙ্গ জোড়" data-en="Lone pairs">নিঃসঙ্গ জোড়</button>
+    <button type="button" id="model-spin" data-bn="নিজে থেকে ঘোরাও" data-en="Auto-rotate">নিজে থেকে ঘোরাও</button>
+    <button type="button" id="model-reset" data-bn="দৃশ্য রিসেট" data-en="Reset view">দৃশ্য রিসেট</button>
+  </div>
+  <p id="model-view-note" class="model-view-note" hidden></p>
+  <div class="sc-form model-zoom">
+    <label for="model-zoom">
+      <span data-bn="জুম" data-en="Zoom">জুম</span>
+      <output id="model-zoom-value" for="model-zoom">100%</output>
+      <input type="range" id="model-zoom" min="55" max="165" value="100">
+    </label>
+  </div>
   <div id="rotation" class="sc-form">
-    <label><span data-bn="অনুভূমিক ঘূর্ণন" data-en="Horizontal rotation">অনুভূমিক ঘূর্ণন</span><input type="range" min="-180" max="180" value="25" id="yaw"></label>
-    <label><span data-bn="উল্লম্ব ঘূর্ণন" data-en="Vertical rotation">উল্লম্ব ঘূর্ণন</span><input type="range" min="-180" max="180" value="25" id="pitch"></label>
+    <label><span data-bn="অনুভূমিক ঘূর্ণন" data-en="Horizontal rotation">অনুভূমিক ঘূর্ণন</span><input type="range" min="-180" max="180" step="0.1" value="25" id="yaw"></label>
+    <label><span data-bn="উল্লম্ব ঘূর্ণন" data-en="Vertical rotation">উল্লম্ব ঘূর্ণন</span><input type="range" min="-180" max="180" step="0.1" value="25" id="pitch"></label>
   </div>
 </section><div id="activities"></div></main></div>
 <script type="module" src="experiments.js"></script></body></html>

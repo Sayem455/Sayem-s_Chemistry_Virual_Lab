@@ -64,12 +64,25 @@ canvas.molecule-view {
   display: block;
   width: min(100%, 470px);
   height: auto;
-  margin: 16px auto;
-  background: radial-gradient(ellipse at 50% 45%, #fff, #e4efff);
-  border-radius: 15px;
+  margin: 0 auto;
+  background: transparent;
 }
-canvas.molecule-view[data-mode="3d"] { touch-action: none; cursor: grab; }
-canvas.molecule-view[data-mode="3d"]:active { cursor: grabbing; }
+.model-stage {
+  margin: 14px 0;
+  border: 1px solid #dbe7f9;
+  border-radius: 16px;
+  background: radial-gradient(ellipse at 50% 45%, #fff, #e4efff);
+}
+canvas.molecule-view[data-mode="3d"], canvas.molecule-view[data-mode="fill"] { touch-action: none; cursor: grab; }
+canvas.molecule-view:active:not([data-mode="2d"]) { cursor: grabbing; }
+.model-tools { margin: 10px 0; }
+.model-tools button { min-height: 44px; }
+.model-tools button:disabled { opacity: .55; cursor: default; }
+.model-view-note { font-size: .88rem; color: #5e3b91; }
+.model-zoom { margin: 12px 0; }
+.model-zoom label { grid-template-columns: 1fr auto; }
+.model-zoom output { color: #234fa5; margin-inline-start: .5em; }
+.model-zoom input { grid-column: 1 / -1; }
 .model-facts { grid-template-columns: repeat(3, minmax(0, 1fr)); margin: 0 0 12px; }
 .model-facts div { padding: 10px; border-radius: 10px; background: #f3f7ff; }
 .model-facts dt { font-size: .85rem; color: #435677; }
