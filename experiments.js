@@ -11,6 +11,7 @@ let ion = "Na";
 let mode = "3d";
 let chlorideStep = 0;
 let bromineAdded = false;
+let limewaterStep = 0;
 let drag;
 const canvas = $("molecule");
 const compound = $("compound");
@@ -26,6 +27,25 @@ const chlorideResults = [
   ["সাদা AgCl অধঃক্ষেপ তৈরি হয়েছে।", "A white AgCl precipitate forms.", "Ag⁺(aq) + Cl⁻(aq) → AgCl(s)"],
   ["অধঃক্ষেপ দ্রবীভূত হয়েছে। বর্ণহীন ডাইঅ্যামিন সিলভার(I) কমপ্লেক্স তৈরি হয়।", "The precipitate dissolves and forms a colourless diamminesilver(I) complex.", "AgCl(s) + 2NH₃(aq) ⇌ [Ag(NH₃)₂]⁺(aq) + Cl⁻(aq)"],
 ];
+
+const limewaterResults = [
+  ["চুনের পানি স্বচ্ছ। এতে দ্রবীভূত Ca(OH)₂ আছে।", "Limewater is clear. It contains dissolved Ca(OH)₂.", ""],
+  ["সাদা CaCO₃ অধঃক্ষেপ তৈরি হওয়ায় চুনের পানি দুধের মতো ঘোলা হয়েছে।", "White CaCO₃ precipitate makes the limewater look milky.", "Ca(OH)₂(aq) + CO₂(g) → CaCO₃(s) + H₂O(l)"],
+  ["অতিরিক্ত CO₂ দিলে দ্রবণীয় ক্যালসিয়াম হাইড্রোজেন কার্বনেট তৈরি হয়। পানি আবার স্বচ্ছ দেখায়।", "Excess CO₂ forms soluble calcium hydrogencarbonate. The solution clears again.", "CaCO₃(s) + CO₂(g) + H₂O(l) → Ca(HCO₃)₂(aq)"],
+];
+
+function renderLimewater() {
+  const [bn, en, equation] = limewaterResults[limewaterStep];
+  $("limewater-result").textContent = tr(bn, en);
+  $("limewater-equation").textContent = equation;
+  $("limewater-equation").hidden = !equation;
+  $("limewater-liquid").setAttribute("fill", limewaterStep === 1 ? "#fffef5" : "#b4def0");
+  $("limewater-bubbles").setAttribute("visibility", limewaterStep ? "visible" : "hidden");
+  document.querySelectorAll("[data-limewater]").forEach(button => {
+    const step = Number(button.dataset.limewater);
+    button.disabled = step ? step !== limewaterStep + 1 : limewaterStep === 0;
+  });
+}
 
 function renderReactionTests() {
   const [bn, en, equation] = chlorideResults[chlorideStep];
@@ -78,6 +98,10 @@ document.querySelectorAll("[data-chloride]").forEach(button => button.onclick = 
 });
 $("add-bromine").onclick = () => { bromineAdded = true; renderReactionTests(); };
 $("reset-bromine").onclick = () => { bromineAdded = false; renderReactionTests(); };
+document.querySelectorAll("[data-limewater]").forEach(button => button.onclick = () => {
+  limewaterStep = Number(button.dataset.limewater);
+  renderLimewater();
+});
 document.querySelectorAll("[data-model]").forEach(button => button.onclick = () => {
   mode = button.dataset.model;
   renderModel();
@@ -103,6 +127,7 @@ canvas.onlostpointercapture = () => { drag = undefined; };
 const chapterDemos = {
   "1-2": [["#flame", "শিখা পরীক্ষা", "Flame test"], ["#chloride", "ক্লোরাইড শনাক্তকরণ", "Chloride test"]],
   "1-3": [["#water", "3D অণুর মডেল", "3D molecular models"], ["lab.html#periodic", "পর্যায় সারণি", "Periodic table"]],
+  "2-1": [["#limewater", "চুনের পানিতে CO₂ শনাক্তকরণ", "Detect CO₂ with limewater"]],
   "2-2": [["#bromine", "ব্রোমিন পানির পরীক্ষা", "Bromine water test"], ["#water", "জৈব অণুর আকৃতি", "Organic molecular shapes"]],
   "2-3": [["lab.html#titration", "অ্যাসিড–ক্ষার টাইট্রেশন", "Acid–base titration"]],
   "2-4": [["lab.html#electrolysis", "তড়িৎ বিশ্লেষণের মডেল", "Electrolysis model"]],
@@ -134,6 +159,7 @@ languageButton(() => {
   renderChapterIndex();
   renderFlame();
   renderReactionTests();
+  renderLimewater();
   renderModel();
   renderActivities();
 });

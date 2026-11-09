@@ -30,6 +30,7 @@ export const starter = [
   ["1-2","bank","গুণগত রসায়ন · অনুশীলন প্রশ্ন","Qualitative chemistry · practice questions","materials/qualitative-practice.pdf"],
   ["1-3","model","পর্যায় সারণি","Periodic table","lab.html#periodic"],
   ["1-3","model","অণুর আকৃতি · 2D ও 3D","Molecular shapes · 2D and 3D","experiments.html#water"],
+  ["2-1","experiment","চুনের পানিতে CO₂ শনাক্তকরণ","Detect CO₂ with limewater","experiments.html#limewater"],
   ["2-2","experiment","ব্রোমিন পানির পরীক্ষা","Bromine water test","experiments.html#bromine"],
   ["2-3","experiment","এসিড–ক্ষার টাইট্রেশন","Acid–base titration","lab.html#titration"],
   ["2-4","experiment","তড়িৎ বিশ্লেষণ","Electrolysis","lab.html#electrolysis"]
